@@ -14,13 +14,9 @@
 			width: 240px;
 			height: 440px;
 			overflow: hidden;
-			transform: skewY(-5deg);
-			background: rgb(233,233,233);
-			background: linear-gradient(0deg, rgba(233,233,233,1) 0%, rgba(228,228,228,1) 67%, rgba(255,255,255,1) 100%);
 
 			img {
-					height: 200%;
-					object-fit: cover;
+				height: 100%;
 			}
 		}
 	}

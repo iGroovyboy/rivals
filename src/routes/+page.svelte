@@ -73,7 +73,7 @@
 <div class="list flex flex-col">
 	{#each filteredHeroes as hero}
 		<div class="row mb-4 flex gap-x-4">
-			<HeroBigAvatar filename="Doctor_Strange.webp" name={hero.name} classname={hero.role} />
+			<HeroBigAvatar filename="Doctor_Strange_Tile.webp" name={hero.name} classname={hero.role} />
 			{#if hero.data}
 				<div class="counterpicks flex flex-col justify-around">
 					{#each Object.entries(hero.data) as [heroClass, heroesList]}
