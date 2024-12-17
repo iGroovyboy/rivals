@@ -2,8 +2,10 @@ import Heroes from '$lib/heroes.ts';
 import { error } from '@sveltejs/kit';
 import { createCounterPicks, deepCloneObject } from '$lib/helpers';
 import type { HeroData } from '$lib';
+import type { PageLoad } from './$types';
+import { db_fetch_json } from '$lib/api';
 
-export function load() {
+export const load: PageLoad = async () => {
 	if (!Heroes) error(404);
 
 	const heroes: HeroData[] = [];
@@ -13,7 +15,10 @@ export function load() {
 		heroes.push(hero);
 	});
 
+	const item = await db_fetch_json('/rest/v1/heroes', 'GET');
+
 	return {
-		heroes
+		heroes,
+		item
 	};
-}
+};

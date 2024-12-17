@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import HeroBigAvatar from './HeroBigAvatar.svelte';
-	import ClassAvatar from './ClassAvatar.svelte';
-	import HeroAvatar from './HeroAvatar.svelte';
 	import { filterableClasses, type HeroData } from '$lib';
 	import { filterHeroesByClass } from '$lib/helpers';
+	import HeroBigAvatar from '$lib/components/HeroBigAvatar.svelte';
+	import ClassAvatar from '$lib/components/ClassAvatar.svelte';
+	import HeroAvatar from '$lib/components/HeroAvatar.svelte';
 
 	let { data } = $props();
 
@@ -73,7 +73,7 @@
 <div class="list flex flex-col">
 	{#each filteredHeroes as hero}
 		<div class="row mb-4 flex gap-x-4">
-			<HeroBigAvatar filename="Doctor_Strange_Tile.webp" name={hero.name} classname={hero.role} />
+			<HeroBigAvatar filename="doctor_strange.png" name={hero.name} classname={hero.role} />
 			{#if hero.data}
 				<div class="counterpicks flex flex-col justify-around">
 					{#each Object.entries(hero.data) as [heroClass, heroesList]}
@@ -83,11 +83,10 @@
 								<ul class="counters flex gap-x-2">
 									{#each heroesList as counterHero}
 										<li>
-											<!--											<HeroAvatar-->
-											<!--												filename={counterHero.icon}-->
-											<!--												name={counterHero.name}-->
-											<!--												classname={heroClass}-->
-											<!--											/>-->
+											<HeroAvatar
+												name='The Punisher'
+												classname="duelist"
+											/>
 										</li>
 									{/each}
 								</ul>

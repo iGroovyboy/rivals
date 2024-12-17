@@ -18,3 +18,8 @@ export interface HeroData {
 	role: string;
 	data?: unknown;
 }
+
+export interface APIHeroData {
+	name: string;
+	class: string;
+}

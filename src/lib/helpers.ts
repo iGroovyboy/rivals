@@ -1,4 +1,10 @@
-import { CLASS, type Counterpicks, filterableClasses, type HeroData } from '$lib/index';
+import {
+	type APIHeroData,
+	CLASS,
+	type Counterpicks,
+	filterableClasses,
+	type HeroData
+} from '$lib/index';
 import Heroes from '$lib/heroes';
 
 export const createCounterPicks = (hero: HeroData): null | Counterpicks => {
@@ -34,3 +40,6 @@ export const filterHeroesByClass = (data: HeroData[], classname: string): HeroDa
 
 	return data;
 };
+
+export const getHeroByName = (data: APIHeroData[], name: string) =>
+	data?.find((h) => h.name === name);

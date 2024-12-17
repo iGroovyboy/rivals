@@ -1,10 +1,14 @@
 <script lang="ts">
-	let { filename, name, classname } = $props();
+	let { name, classname } = $props();
+
+	const iconFilename = (name: string): string => {
+		return name?.toLowerCase().replaceAll(' ', '_').replaceAll('&', 'n') + '.png';
+	};
 </script>
 
 <div class="hero-big-avatar">
 	<div class="frame">
-		<img src="/icons/{classname}/{filename}" alt={name} />
+		<img src="/icons/{classname}/{iconFilename(name)}" alt={name} />
 	</div>
 </div>
 
