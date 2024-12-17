@@ -1,40 +1,13 @@
-import {
-	type APIHeroData,
-	CLASS,
-	type Counterpicks,
-	filterableClasses,
-	type HeroData
-} from '$lib/index';
-import Heroes from '$lib/heroes';
-
-export const createCounterPicks = (hero: HeroData): null | Counterpicks => {
-	const counterNames = hero.counterpicks;
-
-	if (!counterNames) {
-		return null;
-	}
-
-	const counterPicks = {
-		[CLASS.VANGUARD]: [],
-		[CLASS.DUELIST]: [],
-		[CLASS.STRATEGIST]: []
-	};
-
-	Heroes.filter((h) => counterNames.includes(h.name)).forEach((h) => {
-		counterPicks[h.role].push(h);
-	});
-
-	return counterPicks;
-};
+import { type APICounterpickData, type APIHeroData, filterableClasses } from '$lib/index';
 
 export const deepCloneObject = (obj: unknown) => {
 	return JSON.parse(JSON.stringify(obj));
 };
 
-export const filterHeroesByClass = (data: HeroData[], classname: string): HeroData[] => {
+export const filterHeroesByClass = (data: APIHeroData[], classname: string): APIHeroData[] => {
 	if (filterableClasses.includes(classname)) {
 		return data.filter((h) => {
-			return h.role.toLowerCase() === classname;
+			return h.class.toLowerCase() === classname;
 		});
 	}
 
@@ -43,3 +16,22 @@ export const filterHeroesByClass = (data: HeroData[], classname: string): HeroDa
 
 export const getHeroByName = (data: APIHeroData[], name: string) =>
 	data?.find((h) => h.name === name);
+
+export const getCounterpicksByHeroId = (
+	hero_id: number,
+	heroes: APIHeroData[],
+	counterpicks: APICounterpickData[]
+): APIHeroData[] => {
+	const heroCounterpicks = counterpicks.filter((c) => c.hero_id === hero_id);
+	if (!heroCounterpicks.length) {
+		return [];
+	}
+
+	const data: APIHeroData[] = [];
+	heroCounterpicks.forEach((cp) => {
+		const h = heroes.find((hero) => hero.id === cp.counter_hero_id);
+		data.push(h);
+	});
+
+	return data;
+};

@@ -9,7 +9,7 @@ export const filterableClasses = [CLASS.VANGUARD, CLASS.DUELIST, CLASS.STRATEGIS
 
 export type Classname = CLASS.VANGUARD | CLASS.DUELIST | CLASS.STRATEGIST;
 
-export type Counterpicks = Record<Classname, HeroData[]>;
+export type Counterpicks = Record<Classname, APIHeroData[]>;
 
 export interface HeroData {
 	counterpicks: string[];
@@ -20,6 +20,15 @@ export interface HeroData {
 }
 
 export interface APIHeroData {
+	id: number;
 	name: string;
 	class: string;
+	counterpicks?: unknown;
+}
+
+export interface APICounterpickData {
+	id: number;
+	hero_id: number;
+	counter_hero_id: number;
+	created_at?: string;
 }

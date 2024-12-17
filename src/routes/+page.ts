@@ -1,24 +1,38 @@
-import Heroes from '$lib/heroes.ts';
-import { error } from '@sveltejs/kit';
-import { createCounterPicks, deepCloneObject } from '$lib/helpers';
-import type { HeroData } from '$lib';
 import type { PageLoad } from './$types';
-import { db_fetch_json } from '$lib/api';
+import { api } from '$lib/api';
+import { type APIHeroData, CLASS, type Counterpicks } from '$lib';
+import { getCounterpicksByHeroId } from '$lib/helpers';
 
 export const load: PageLoad = async () => {
-	if (!Heroes) error(404);
+	const counterpicks = await api.get('/rest/v1/counterpicks');
+	const heroes: APIHeroData[] = await api.get('/rest/v1/heroes');
 
-	const heroes: HeroData[] = [];
-	Heroes.forEach((h) => {
-		const hero = deepCloneObject(h);
-		hero.data = createCounterPicks(h);
-		heroes.push(hero);
+	const data = heroes.map((hero) => {
+		return {
+			...hero,
+			counterpicks: prepareCounterpicks(getCounterpicksByHeroId(hero.id, heroes, counterpicks))
+		};
 	});
 
-	const item = await db_fetch_json('/rest/v1/heroes', 'GET');
-
 	return {
-		heroes,
-		item
+		heroes: data
 	};
+};
+
+const prepareCounterpicks = (heroes: APIHeroData[]): null | Counterpicks => {
+	if (!heroes || !heroes.length) {
+		return null;
+	}
+
+	const counterPicks: Counterpicks = {
+		[CLASS.VANGUARD]: [],
+		[CLASS.DUELIST]: [],
+		[CLASS.STRATEGIST]: []
+	};
+
+	heroes.forEach((h) => {
+		counterPicks[h.class].push(h);
+	});
+
+	return counterPicks;
 };
