@@ -5,6 +5,7 @@
 	import HeroBigAvatar from '$lib/components/HeroBigAvatar.svelte';
 	import ClassAvatar from '$lib/components/ClassAvatar.svelte';
 	import HeroAvatar from '$lib/components/HeroAvatar.svelte';
+	import { useStore } from '$lib/store.svelte';
 
 	let { data } = $props();
 
@@ -16,17 +17,27 @@
 
 	let isLayoutGrid = $state(false);
 
+	let isFavoritesOn = $state(false);
+
 	let filteredHeroesByClass: APIHeroData[] = $derived(
 		canFilterByClass ? filterHeroesByClass(data.heroes, currentClass) : data.heroes
 	);
 
-	let filteredHeroes: APIHeroData[] = $derived(
-		searchText.length
-			? filteredHeroesByClass.filter((h) => {
+	let filteredHeroes: APIHeroData[] = $derived.by(() => {
+		const prefilteredHeroes = isFavoritesOn
+			? filterFavorites(filteredHeroesByClass)
+			: filteredHeroesByClass;
+
+		return searchText.length
+			? prefilteredHeroes.filter((h) => {
 					return h.name.toLowerCase().includes(searchText?.toLowerCase());
 				})
-			: filteredHeroesByClass
-	);
+			: prefilteredHeroes;
+	});
+
+	const filterFavorites = (heroes: APIHeroData[]): APIHeroData[] => {
+		return heroes.filter((h) => useStore.favorites.includes(h.name));
+	};
 
 	const clearFilter = () => {
 		searchText = '';
@@ -38,9 +49,9 @@
 <div class="w-12/12 mb-4 flex h-6 2xl:w-8/12">
 	<div class="bg w-12/12 absolute -left-1 z-0 h-6 -skew-x-12 bg-[var(--black)] 2xl:w-8/12"></div>
 
-	<div class="controls relative z-10 flex w-full gap-x-6 text-[var(--white)]">
+	<div class="controls relative z-10 flex w-full gap-x-3 text-[var(--white)]">
 		<button
-			class="flex items-center gap-x-0.5 uppercase"
+			class="flex items-center gap-x-0.5 text-sm uppercase"
 			onclick={() => (isLayoutGrid = !isLayoutGrid)}
 		>
 			<svg
@@ -52,6 +63,11 @@
 			>
 			Grid
 		</button>
+
+		<div class="flex items-center gap-x-1 px-2">
+			<input type="checkbox" name="fav" id="fav" class="h-3 w-3" bind:checked={isFavoritesOn} />
+			<label for="fav" class="text-sm uppercase">FAVORITES</label>
+		</div>
 
 		<div
 			class="search -mt-0.5 mr-0.5 flex h-6 w-full -skew-x-12 items-center justify-between bg-[var(--light-grey)]"
@@ -75,7 +91,7 @@
 
 <div class="list relative flex flex-col" class:isLayoutGrid>
 	{#each filteredHeroes as hero}
-		<div class="cell mb-4 flex gap-x-4 w-[48%]">
+		<div class="cell mb-4 flex w-[48%] gap-x-4">
 			<HeroBigAvatar name={hero.name} classname={hero.class} isFavShown />
 			{#if hero.counterpicks}
 				<div class="counterpicks flex flex-col justify-around">
@@ -122,6 +138,6 @@
 	}
 
 	svg {
-		inline-size: 1rem;
+		inline-size: 0.8rem;
 	}
 </style>

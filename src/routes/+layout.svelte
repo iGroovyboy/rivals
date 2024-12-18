@@ -7,43 +7,46 @@
 
 	let { children } = $props();
 
-	let currentClass = $derived($page.url.searchParams.get('class') || "");
-	
-	onMount(() => { 
+	let currentClass = $derived($page.url.searchParams.get('class') || '');
+
+	let currentRoute = $derived($page.route.id || '');
+
+	onMount(() => {
 		restoreStore();
-	})
+	});
 </script>
 
 <div class="bg -z-10"></div>
 
-<nav class="flex w-full justify-between overflow-hidden z-50">
-	<div class="title w-1/12 mx-2 flex justify-center">[R-C-P]</div>
-	<div class="menu px-6 w-11/12 flex flex-row justify-between">
+<nav class="z-50 flex w-full justify-between overflow-hidden">
+	<div class="title mx-2 flex w-1/12 justify-center">[R-C-P]</div>
+	<div class="menu flex w-11/12 flex-row justify-between px-6">
 		<div class="start">
-			<ul class="flex flex-row gap-x-6">
-				<li>
-					<a class="capitalize" class:active={currentClass === CLASS.ALL} href="/?class={CLASS.ALL}">{CLASS.ALL}</a>
+			<ul class="flex h-full">
+				<li class="flex items-center px-2" class:active={currentClass === CLASS.ALL}>
+					<a class="capitalize" href="/?class={CLASS.ALL}">{CLASS.ALL}</a>
 				</li>
-				<li>
-					<a class="capitalize" class:active={currentClass === CLASS.VANGUARD} href="/?class={CLASS.VANGUARD}">{CLASS.VANGUARD}</a>
+				<li class="flex items-center px-2" class:active={currentClass === CLASS.VANGUARD}>
+					<a class="capitalize flex" href="/?class={CLASS.VANGUARD}">{CLASS.VANGUARD}</a>
 				</li>
-				<li>
-					<a class="capitalize" class:active={currentClass === CLASS.DUELIST} href="/?class={CLASS.DUELIST}">{CLASS.DUELIST}</a>
+				<li class="flex items-center px-2" class:active={currentClass === CLASS.DUELIST}>
+					<a class="capitalize" href="/?class={CLASS.DUELIST}">{CLASS.DUELIST}</a>
 				</li>
-				<li>
-					<a class="capitalize" class:active={currentClass === CLASS.STRATEGIST} href="/?class={CLASS.STRATEGIST}">{CLASS.STRATEGIST}</a>
+				<li class="flex items-center px-2" class:active={currentClass === CLASS.STRATEGIST}>
+					<a class="capitalize" href="/?class={CLASS.STRATEGIST}">{CLASS.STRATEGIST}</a>
 				</li>
+<!--				<li class="bpx-2 flex items-center">-->
+<!--					<div class="separator w-[4px] h-4 mx-2 rounded bg-white/40"></div>-->
+<!--				</li>-->
 			</ul>
 		</div>
 		<div class="end">
-			<ul class="flex flex-row gap-x-6">
-				<li>
+			<ul class="flex h-full">
+				<li class="flex items-center px-2" class:active={currentRoute === '/suggest'}>
 					<a href="/suggest">Suggest</a>
 				</li>
-				<li>
-					<a href="/fav">Favorites</a>
-				</li>
-				<li>
+
+				<li class="flex items-center px-2" class:active={currentRoute === '/about'}>
 					<a href="/about">?</a>
 				</li>
 			</ul>
@@ -51,7 +54,7 @@
 	</div>
 </nav>
 
-<div class="wrapper pt-8 w-9/12 mx-auto z-0">
+<div class="wrapper z-0 mx-auto w-9/12 pt-8">
 	{@render children()}
 </div>
 
@@ -72,8 +75,20 @@
 		background-color: var(--black);
 		color: var(--white);
 
-		a.active {
+		li {
+
+			a:hover {
 				color: var(--highlight);
+			}
+
+			&.active {
+				background-color: var(--highlight);
+				color: var(--dark-blue);
+
+				a:hover {
+					color: var(--dark-blue);
+				}
+			}
 		}
 	}
 </style>
