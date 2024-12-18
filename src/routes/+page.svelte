@@ -76,7 +76,7 @@
 <div class="list relative flex flex-col" class:isLayoutGrid>
 	{#each filteredHeroes as hero}
 		<div class="cell mb-4 flex gap-x-4 w-[48%]">
-			<HeroBigAvatar name={hero.name} classname={hero.class} />
+			<HeroBigAvatar name={hero.name} classname={hero.class} isFavShown />
 			{#if hero.counterpicks}
 				<div class="counterpicks flex flex-col justify-around">
 					{#each Object.entries(hero.counterpicks) as [heroClass, heroesList]}

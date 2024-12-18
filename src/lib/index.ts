@@ -32,3 +32,5 @@ export interface APICounterpickData {
 	counter_hero_id: number;
 	created_at?: string;
 }
+
+export const LS_KEYS = { FAVORITES: 'favorites' };

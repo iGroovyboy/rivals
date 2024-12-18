@@ -2,10 +2,16 @@
 	import '../app.css';
 	import { CLASS } from '$lib';
 	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
+	import { restoreStore } from '$lib/store.svelte';
 
 	let { children } = $props();
 
 	let currentClass = $derived($page.url.searchParams.get('class') || "");
+	
+	onMount(() => { 
+		restoreStore();
+	})
 </script>
 
 <div class="bg -z-10"></div>
