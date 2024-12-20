@@ -1,5 +1,6 @@
 import { PUBLIC_API_KEY, PUBLIC_API_URL } from '$env/static/public';
 import { createClient } from '@supabase/supabase-js';
+import { toast, TOAST_COLOR } from '$lib/toasts.svelte';
 
 export const supabase = createClient(PUBLIC_API_URL, PUBLIC_API_KEY);
 
@@ -9,7 +10,7 @@ export const supabaseLogin = async () => {
 	});
 
 	if (error) {
-		// TODO: toast
+		toast("Couldn't login! Please try again later!", TOAST_COLOR.RED);
 		console.error(error.message);
 	}
 
@@ -22,7 +23,6 @@ export const supabaseLogin = async () => {
 export const supabaseLogout = async () => {
 	const { error } = await supabase.auth.signOut();
 	if (error) {
-		// TODO: toast
 		console.error(error.message);
 	}
 };

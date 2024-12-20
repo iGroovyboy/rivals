@@ -7,6 +7,7 @@
 	import { supabaseGetUser, supabaseLogin, supabaseLogout } from '$lib/auth.svelte';
 	import Profile from './Profile.svelte';
 	import type { User } from '@supabase/supabase-js';
+	import Toasts from '$lib/components/Toasts.svelte';
 
 	let { children, data } = $props();
 
@@ -70,7 +71,8 @@
 							onclick={() => (isProfileShown = !isProfileShown)}
 							><img
 								class="flex h-4"
-								src={user?.user_metadata?.avatar_url || ''}
+								src={user?.user_metadata?.avatar_url}
+								onerror={this.src='/icons/person-circle-outline.svg'}
 								alt="User avatar"
 							/>Profile</button
 						>
@@ -92,6 +94,8 @@
 <div class="wrapper z-0 mx-auto w-9/12 pt-8">
 	{@render children()}
 </div>
+
+<Toasts />
 
 <style>
 	.bg {

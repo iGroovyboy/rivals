@@ -3,6 +3,7 @@
 	import Button from '$lib/components/Button.svelte';
 	import { getHeroByName } from '$lib/helpers';
 	import { supabase } from '$lib/auth.svelte';
+	import { toast, TOAST_COLOR } from '$lib/toasts.svelte';
 
 	let { data } = $props();
 
@@ -35,15 +36,14 @@
 
 			if (error) {
 				console.error(error.message);
-				// TODO toast - something gone wrong
+				toast("Something went wrong! Please try again later!", TOAST_COLOR.RED);
 			}
 
 			selectedMain = [];
 			selectedHeroes = [];
-			// toast
+			toast("Suggestion successfully saved!");
 		} catch (e) {
-			// toast
-			// TODO toast - something gone wrong
+			toast("Something went wrong! Please try again later!", TOAST_COLOR.RED);
 		}
 
 		isLoading = false;
