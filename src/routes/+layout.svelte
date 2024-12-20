@@ -4,15 +4,29 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import { restoreStore } from '$lib/store.svelte';
+	import { supabaseGetUser, supabaseLogin, supabaseLogout } from '$lib/auth.svelte';
+	import Profile from './Profile.svelte';
+	import type { User } from '@supabase/supabase-js';
 
-	let { children } = $props();
+	let { children, data } = $props();
 
 	let currentClass = $derived($page.url.searchParams.get('class') || '');
 
 	let currentRoute = $derived($page.route.id || '');
 
+	let user = $state<null | User>(null);
+
+	let isProfileShown = $state(false);
+
+	const onLogout = async () => {
+		await supabaseLogout();
+		user = await supabaseGetUser();
+		isProfileShown = false;
+	};
+
 	onMount(() => {
 		restoreStore();
+		user = data.user;
 	});
 </script>
 
@@ -27,7 +41,7 @@
 					<a class="capitalize" href="/?class={CLASS.ALL}">{CLASS.ALL}</a>
 				</li>
 				<li class="flex items-center px-2" class:active={currentClass === CLASS.VANGUARD}>
-					<a class="capitalize flex" href="/?class={CLASS.VANGUARD}">{CLASS.VANGUARD}</a>
+					<a class="flex capitalize" href="/?class={CLASS.VANGUARD}">{CLASS.VANGUARD}</a>
 				</li>
 				<li class="flex items-center px-2" class:active={currentClass === CLASS.DUELIST}>
 					<a class="capitalize" href="/?class={CLASS.DUELIST}">{CLASS.DUELIST}</a>
@@ -35,9 +49,9 @@
 				<li class="flex items-center px-2" class:active={currentClass === CLASS.STRATEGIST}>
 					<a class="capitalize" href="/?class={CLASS.STRATEGIST}">{CLASS.STRATEGIST}</a>
 				</li>
-<!--				<li class="bpx-2 flex items-center">-->
-<!--					<div class="separator w-[4px] h-4 mx-2 rounded bg-white/40"></div>-->
-<!--				</li>-->
+				<!--				<li class="bpx-2 flex items-center">-->
+				<!--					<div class="separator w-[4px] h-4 mx-2 rounded bg-white/40"></div>-->
+				<!--				</li>-->
 			</ul>
 		</div>
 		<div class="end">
@@ -45,7 +59,23 @@
 				<li class="flex items-center px-2" class:active={currentRoute === '/suggest'}>
 					<a href="/suggest">Suggest</a>
 				</li>
-
+				<li class="flex items-center px-2" class:active={isProfileShown}>
+					{#if !user}
+						<button class="flex items-center gap-x-1" onclick={supabaseLogin}
+							><img src="/icons/web_dark_sq_na.svg" alt="Google icon" />Login</button
+						>
+					{:else}
+						<button
+							class="relative flex items-center gap-x-1"
+							onclick={() => (isProfileShown = !isProfileShown)}
+							><img
+								class="flex h-4"
+								src={user?.user_metadata?.avatar_url || ''}
+								alt="User avatar"
+							/>Profile</button
+						>
+					{/if}
+				</li>
 				<li class="flex items-center px-2" class:active={currentRoute === '/about'}>
 					<a href="/about">?</a>
 				</li>
@@ -53,6 +83,11 @@
 		</div>
 	</div>
 </nav>
+{#if user && isProfileShown}
+	<div class="fixed right-0 top-7 z-50">
+		<Profile {user} {onLogout} />
+	</div>
+{/if}
 
 <div class="wrapper z-0 mx-auto w-9/12 pt-8">
 	{@render children()}
@@ -76,8 +111,9 @@
 		color: var(--white);
 
 		li {
-
-			a:hover {
+			a:hover,
+			button:hover,
+			div:hover {
 				color: var(--highlight);
 			}
 

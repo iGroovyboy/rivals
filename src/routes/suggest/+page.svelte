@@ -2,7 +2,7 @@
 	import Heroes from './Heroes.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import { getHeroByName } from '$lib/helpers';
-	import { api } from '$lib/api';
+	import { supabase } from '$lib/auth.svelte';
 
 	let { data } = $props();
 
@@ -28,13 +28,22 @@
 		}
 
 		try	{
-			await api.post('/rest/v1/counterpicks', counterPicks);
+			const { error } = await supabase
+				.from('counterpicks')
+				.insert(counterPicks)
+				.select()
+
+			if (error) {
+				console.error(error.message);
+				// TODO toast - something gone wrong
+			}
 
 			selectedMain = [];
 			selectedHeroes = [];
 			// toast
 		} catch (e) {
 			// toast
+			// TODO toast - something gone wrong
 		}
 
 		isLoading = false;

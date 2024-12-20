@@ -35,3 +35,19 @@ export const getCounterpicksByHeroId = (
 
 	return data;
 };
+
+type UrlData = Record<'host' | 'paths' | 'params', string | string[] | Record<string, string>>;
+export const parseUrl = (url: string): UrlData => {
+	const urlObj = new URL(url);
+
+	const host = urlObj.host;
+
+	const paths = urlObj.pathname.split('/').filter((path) => path);
+
+	const params = {};
+	urlObj.searchParams.forEach((value, key) => {
+		params[key] = value;
+	});
+
+	return { host, paths, params };
+};

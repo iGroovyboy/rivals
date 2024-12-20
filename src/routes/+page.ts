@@ -1,11 +1,20 @@
 import type { PageLoad } from './$types';
-import { api } from '$lib/api';
 import { type APIHeroData, CLASS, type Counterpicks, filterableClasses } from '$lib';
 import { getCounterpicksByHeroId } from '$lib/helpers';
+import { supabase } from '$lib/auth.svelte';
 
 export const load: PageLoad = async () => {
-	const counterpicks = await api.get('/rest/v1/counterpicks');
-	const heroes: APIHeroData[] = await api.get('/rest/v1/heroes');
+	let { data: counterpicks }: { data: Counterpicks } = await supabase
+		.from('counterpicks')
+		.select('*');
+	if (!counterpicks) {
+		console.error('No counterpicks found.');
+	}
+
+	let { data: heroes }: { data: APIHeroData[] } = await supabase.from('heroes').select('*');
+	if (!heroes) {
+		console.error('No heroes found.');
+	}
 
 	const data = heroes.map((hero) => {
 		return {

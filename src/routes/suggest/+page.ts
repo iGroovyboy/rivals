@@ -1,8 +1,12 @@
 import type { PageLoad } from './$types';
-import { api } from '$lib/api';
+import type { APIHeroData } from '$lib';
+import { supabase } from '$lib/auth.svelte';
 
 export const load: PageLoad = async () => {
-	const heroes = await api.get('/rest/v1/heroes');
+	let { data: heroes }: { data: APIHeroData[] } = await supabase.from('heroes').select('*');
+	if (!heroes) {
+		console.error('No heroes found.');
+	}
 
 	return {
 		heroes
