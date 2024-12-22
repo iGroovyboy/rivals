@@ -8,3 +8,5 @@ export const load: LayoutLoad = async () => {
 		user
 	};
 };
+
+export const prerender = true;
