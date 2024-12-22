@@ -61,12 +61,6 @@
 		<div class="end">
 			<ul class="flex h-full">
 				<li class="flex items-center px-2" class:active={currentRoute === '/tierlist'}>
-					<button onclick={() => setLocale(LANG.EN)}>EN</button>
-				</li>
-				<li class="flex items-center px-2" class:active={currentRoute === '/tierlist'}>
-					<button onclick={() => setLocale(LANG.RU)}>РУС</button>
-				</li>
-				<li class="flex items-center px-2" class:active={currentRoute === '/tierlist'}>
 					<a href="/tierlist">{$_('menu.tierlist')}</a>
 				</li>
 				<li class="flex items-center px-2" class:active={currentRoute === '/suggest'}>
