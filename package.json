@@ -36,6 +36,7 @@
 		"vitest": "^2.0.4"
 	},
 	"dependencies": {
-		"@supabase/supabase-js": "^2.47.10"
+		"@supabase/supabase-js": "^2.47.10",
+		"svelte-dnd-action": "^0.9.53"
 	}
 }

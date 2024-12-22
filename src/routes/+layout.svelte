@@ -57,6 +57,9 @@
 		</div>
 		<div class="end">
 			<ul class="flex h-full">
+				<li class="flex items-center px-2" class:active={currentRoute === '/tierlist'}>
+					<a href="/tierlist">Tierlist</a>
+				</li>
 				<li class="flex items-center px-2" class:active={currentRoute === '/suggest'}>
 					<a href="/suggest">Suggest</a>
 				</li>

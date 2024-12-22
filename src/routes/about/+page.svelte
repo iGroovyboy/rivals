@@ -1,15 +1,11 @@
 <script>
 	import BannerButton from './BannerButton.svelte';
+	import ControlsBar from '$lib/components/ControlsBar.svelte';
 
 	let isAbout = $state(true);
 </script>
 
-<div class="mb-4 mt-4 h-6 w-full 2xl:w-8/12">
-	<div
-		class="bg absolute -left-1 z-0 h-6 w-full min-w-10 -skew-x-12 bg-[var(--black)] xl:w-8/12"
-	></div>
-
-	<div class="relative z-10 flex h-6 w-full text-[var(--white)]">
+<ControlsBar gap="0">
 		<button onclick={() => (isAbout = true)} class:active={isAbout} class="px-2 text-sm uppercase">
 			ABOUT
 		</button>
@@ -20,8 +16,7 @@
 		>
 			HELP
 		</button>
-	</div>
-</div>
+</ControlsBar>
 
 {#if isAbout}
 	<article class="about flex flex-col">

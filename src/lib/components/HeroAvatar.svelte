@@ -4,8 +4,8 @@
 	interface Props {
 		name: string;
 		classname: Classname;
-		onclick: () => void;
-		selected: boolean;
+		onclick?: () => void;
+		selected?: boolean;
 	}
 	let { name, classname, onclick, selected } = $props<Props>();
 

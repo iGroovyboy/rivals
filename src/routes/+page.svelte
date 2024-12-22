@@ -6,6 +6,7 @@
 	import ClassAvatar from '$lib/components/ClassAvatar.svelte';
 	import HeroAvatar from '$lib/components/HeroAvatar.svelte';
 	import { useStore } from '$lib/store.svelte';
+	import ControlsBar from '$lib/components/ControlsBar.svelte';
 
 	let { data } = $props();
 
@@ -46,10 +47,7 @@
 
 <h1>Counter Picks</h1>
 
-<div class="w-full mb-4 h-6 2xl:w-8/12">
-	<div class="bg w-full absolute -left-1 z-0 h-6 -skew-x-12 bg-[var(--black)] 2xl:w-8/12"></div>
-
-	<div class="controls relative z-10 flex w-full gap-x-3 text-[var(--white)]">
+<ControlsBar gap='3'>
 		<button
 			class="flex items-center gap-x-0.5 text-sm uppercase"
 			onclick={() => (isLayoutGrid = !isLayoutGrid)}
@@ -86,8 +84,7 @@
 				<img src="/icons/close-outline.svg" alt="Clear filter" />
 			</button>
 		</div>
-	</div>
-</div>
+</ControlsBar>
 
 <div class="list relative flex flex-col" class:isLayoutGrid>
 	{#each filteredHeroes as hero}
