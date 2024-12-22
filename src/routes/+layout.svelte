@@ -59,11 +59,11 @@
 				<li class="bpx-2 flex items-center">
 					<div class="separator w-[4px] h-4 mx-2 rounded bg-white/40"></div>
 				</li>
-				<li class="flex items-center px-2" class:active={currentRoute === '/tierlist'}>
-					<a href="/tierlist">{$_('menu.tierlist')}</a>
-				</li>
 				<li class="flex items-center px-2" class:active={currentRoute === '/suggest'}>
 					<a href="/suggest">{$_('menu.suggest')}</a>
+				</li>
+				<li class="flex items-center px-2" class:active={currentRoute === '/tierlist'}>
+					<a href="/tierlist">{$_('menu.tierlist')}</a>
 				</li>
 			</ul>
 		</div>
