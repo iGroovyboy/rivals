@@ -7,7 +7,7 @@
 	let isFavorite = $derived(useStore.favorites.includes(name));
 
 	const iconFilename = (name: string): string => {
-		return name?.toLowerCase().replaceAll(' ', '_').replaceAll('&', 'n') + '.png';
+		return name?.toLowerCase().replaceAll(' ', '_').replaceAll('&', 'n') + '.webp';
 	};
 </script>
 
