@@ -51,3 +51,20 @@ export const parseUrl = (url: string): UrlData => {
 
 	return { host, paths, params };
 };
+
+export const lightenColor = (color = '#cdcdcd', percent = 60): string => {
+	if (color.startsWith('#')) {
+		color = color.slice(1);
+	}
+
+	const r = parseInt(color.substring(0, 2), 16);
+	const g = parseInt(color.substring(2, 4), 16);
+	const b = parseInt(color.substring(4, 6), 16);
+
+	const newR = Math.min(255, Math.floor(r + (255 - r) * (percent / 100)));
+	const newG = Math.min(255, Math.floor(g + (255 - g) * (percent / 100)));
+	const newB = Math.min(255, Math.floor(b + (255 - b) * (percent / 100)));
+
+	const toHex = (value) => value.toString(16).padStart(2, '0');
+	return `#${toHex(newR)}${toHex(newG)}${toHex(newB)}`;
+};
