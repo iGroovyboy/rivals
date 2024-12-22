@@ -20,7 +20,7 @@ export const removeToast = (id: number) => {
 	useToasts.toasts = useToasts.toasts.filter((t) => t.id !== id);
 };
 
-export const toast = (content: string, color = 'green', duration = 30000) => {
+export const toast = (content: string, color = 'green', duration = 5000) => {
 	if (!content || !content.length) {
 		return;
 	}
@@ -37,5 +37,5 @@ export const toast = (content: string, color = 'green', duration = 30000) => {
 	};
 
 	useToasts.toasts.push(toast);
-	useToasts.toasts[toast.id].timer;
+	useToasts.toasts[toast.id]?.timer;
 };

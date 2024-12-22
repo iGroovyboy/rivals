@@ -4,6 +4,7 @@
 	import { getHeroByName } from '$lib/helpers';
 	import { supabase } from '$lib/auth.svelte';
 	import { toast, TOAST_COLOR } from '$lib/toasts.svelte';
+	import { _ } from 'svelte-i18n';
 
 	let { data } = $props();
 
@@ -23,27 +24,25 @@
 			const hero_id = getHeroByName(data.heroes, selectedMain[0])?.id;
 			const counter_hero_id = getHeroByName(data.heroes, counterpickName)?.id;
 			const row = {
-				hero_id, counter_hero_id
-			}
+				hero_id,
+				counter_hero_id
+			};
 			counterPicks.push(row);
 		}
 
-		try	{
-			const { error } = await supabase
-				.from('counterpicks')
-				.insert(counterPicks)
-				.select()
+		try {
+			const { error } = await supabase.from('counterpicks').insert(counterPicks).select();
 
 			if (error) {
 				console.error(error.message);
-				toast("Something went wrong! Please try again later!", TOAST_COLOR.RED);
+				toast($_('suggest.errors.generic_1'), TOAST_COLOR.RED);
 			}
 
 			selectedMain = [];
 			selectedHeroes = [];
-			toast("Suggestion successfully saved!");
+			toast($_('suggest.saved'));
 		} catch (e) {
-			toast("Something went wrong! Please try again later!", TOAST_COLOR.RED);
+			toast($_('suggest.errors.generic_1'), TOAST_COLOR.RED);
 		}
 
 		isLoading = false;
@@ -52,22 +51,22 @@
 
 <div class="flex justify-between">
 	<div class="flex flex-col">
-		<h2 class="w-full text-center">Pick a hero</h2>
+		<h2 class="w-full text-center">{$_('suggest.pick_hero')}</h2>
 
 		<Heroes data={data.heroes} bind:selected={selectedMain} isSingleSelection />
 	</div>
 
 	<div class="splitter mt-6 opacity-45">
-		<img src="/img/vertical-line.svg" alt="decoration">
+		<img src="/img/vertical-line.svg" alt="decoration" />
 	</div>
 
 	<div class="flex flex-col">
-		<h2 class="w-full text-center">Pick the hero's counterpicks</h2>
+		<h2 class="w-full text-center">{$_('suggest.pick_counter')}</h2>
 
-		<Heroes data={data.heroes} bind:selected={selectedHeroes}  />
+		<Heroes data={data.heroes} bind:selected={selectedHeroes} />
 	</div>
 </div>
 
 <div class="flex justify-center">
-	<Button disabled={isLoading || !canSave} onclick={save}>Suggest</Button>
+	<Button disabled={isLoading || !canSave} onclick={save}>{$_('suggest.submit')}</Button>
 </div>

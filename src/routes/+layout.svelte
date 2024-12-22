@@ -8,6 +8,9 @@
 	import Profile from './Profile.svelte';
 	import type { User } from '@supabase/supabase-js';
 	import Toasts from '$lib/components/Toasts.svelte';
+	import { _ } from 'svelte-i18n';
+	import { initI18N, LANG, setLocale } from '../i18n/i18n';
+	import Submenu from '$lib/components/Submenu.svelte';
 
 	let { children, data } = $props();
 
@@ -19,6 +22,8 @@
 
 	let isProfileShown = $state(false);
 
+	let isOptionsShown = $state(false);
+
 	const onLogout = async () => {
 		await supabaseLogout();
 		user = await supabaseGetUser();
@@ -26,6 +31,7 @@
 	};
 
 	onMount(() => {
+		initI18N();
 		restoreStore();
 		user = data.user;
 	});
@@ -39,34 +45,37 @@
 		<div class="start">
 			<ul class="flex h-full">
 				<li class="flex items-center px-2" class:active={currentClass === CLASS.ALL}>
-					<a class="capitalize" href="/?class={CLASS.ALL}">{CLASS.ALL}</a>
+					<a class="capitalize" href="/?class={CLASS.ALL}">{$_('class.all')}</a>
 				</li>
 				<li class="flex items-center px-2" class:active={currentClass === CLASS.VANGUARD}>
-					<a class="flex capitalize" href="/?class={CLASS.VANGUARD}">{CLASS.VANGUARD}</a>
+					<a class="flex capitalize" href="/?class={CLASS.VANGUARD}">{$_('class.vanguard')}</a>
 				</li>
 				<li class="flex items-center px-2" class:active={currentClass === CLASS.DUELIST}>
-					<a class="capitalize" href="/?class={CLASS.DUELIST}">{CLASS.DUELIST}</a>
+					<a class="capitalize" href="/?class={CLASS.DUELIST}">{$_('class.duelist')}</a>
 				</li>
 				<li class="flex items-center px-2" class:active={currentClass === CLASS.STRATEGIST}>
-					<a class="capitalize" href="/?class={CLASS.STRATEGIST}">{CLASS.STRATEGIST}</a>
+					<a class="capitalize" href="/?class={CLASS.STRATEGIST}">{$_('class.strategist')}</a>
 				</li>
-				<!--				<li class="bpx-2 flex items-center">-->
-				<!--					<div class="separator w-[4px] h-4 mx-2 rounded bg-white/40"></div>-->
-				<!--				</li>-->
 			</ul>
 		</div>
 		<div class="end">
 			<ul class="flex h-full">
 				<li class="flex items-center px-2" class:active={currentRoute === '/tierlist'}>
-					<a href="/tierlist">Tierlist</a>
+					<button onclick={() => setLocale(LANG.EN)}>EN</button>
+				</li>
+				<li class="flex items-center px-2" class:active={currentRoute === '/tierlist'}>
+					<button onclick={() => setLocale(LANG.RU)}>РУС</button>
+				</li>
+				<li class="flex items-center px-2" class:active={currentRoute === '/tierlist'}>
+					<a href="/tierlist">{$_('menu.tierlist')}</a>
 				</li>
 				<li class="flex items-center px-2" class:active={currentRoute === '/suggest'}>
-					<a href="/suggest">Suggest</a>
+					<a href="/suggest">{$_('menu.suggest')}</a>
 				</li>
 				<li class="flex items-center px-2" class:active={isProfileShown}>
 					{#if !user}
 						<button class="flex items-center gap-x-1" onclick={supabaseLogin}
-							><img src="/icons/web_dark_sq_na.svg" alt="Google icon" />Login</button
+							><img src="/icons/web_dark_sq_na.svg" alt="Google icon" />{$_('menu.login')}</button
 						>
 					{:else}
 						<button
@@ -75,22 +84,55 @@
 							><img
 								class="flex h-4"
 								src={user?.user_metadata?.avatar_url}
-								onerror={this.src='/icons/person-circle-outline.svg'}
+								onerror={(this.src = '/icons/person-circle-outline.svg')}
 								alt="User avatar"
-							/>Profile</button
+							/>{$_('profile.profile')}</button
 						>
 					{/if}
 				</li>
 				<li class="flex items-center px-2" class:active={currentRoute === '/about'}>
 					<a href="/about">?</a>
 				</li>
+				<li class="flex items-center px-2">
+					<button aria-label="Show options" onclick={() => (isOptionsShown = !isOptionsShown)}>
+						<svg
+							viewBox="0 0 512 512"
+							class="ionicon gear stroke-white stroke-1 hover:stroke-[var(--highlight)]"
+							><path
+								d="M262.29 192.31a64 64 0 1057.4 57.4 64.13 64.13 0 00-57.4-57.4zM416.39 256a154.34 154.34 0 01-1.53 20.79l45.21 35.46a10.81 10.81 0 012.45 13.75l-42.77 74a10.81 10.81 0 01-13.14 4.59l-44.9-18.08a16.11 16.11 0 00-15.17 1.75A164.48 164.48 0 01325 400.8a15.94 15.94 0 00-8.82 12.14l-6.73 47.89a11.08 11.08 0 01-10.68 9.17h-85.54a11.11 11.11 0 01-10.69-8.87l-6.72-47.82a16.07 16.07 0 00-9-12.22 155.3 155.3 0 01-21.46-12.57 16 16 0 00-15.11-1.71l-44.89 18.07a10.81 10.81 0 01-13.14-4.58l-42.77-74a10.8 10.8 0 012.45-13.75l38.21-30a16.05 16.05 0 006-14.08c-.36-4.17-.58-8.33-.58-12.5s.21-8.27.58-12.35a16 16 0 00-6.07-13.94l-38.19-30A10.81 10.81 0 0149.48 186l42.77-74a10.81 10.81 0 0113.14-4.59l44.9 18.08a16.11 16.11 0 0015.17-1.75A164.48 164.48 0 01187 111.2a15.94 15.94 0 008.82-12.14l6.73-47.89A11.08 11.08 0 01213.23 42h85.54a11.11 11.11 0 0110.69 8.87l6.72 47.82a16.07 16.07 0 009 12.22 155.3 155.3 0 0121.46 12.57 16 16 0 0015.11 1.71l44.89-18.07a10.81 10.81 0 0113.14 4.58l42.77 74a10.8 10.8 0 01-2.45 13.75l-38.21 30a16.05 16.05 0 00-6.05 14.08c.33 4.14.55 8.3.55 12.47z"
+								fill="none"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="32"
+							/></svg
+						>
+					</button>
+				</li>
 			</ul>
 		</div>
 	</div>
 </nav>
+
 {#if user && isProfileShown}
 	<div class="fixed right-0 top-7 z-50">
 		<Profile {user} {onLogout} />
+	</div>
+{/if}
+
+{#if isOptionsShown}
+	<div class="fixed right-0 top-7 z-50">
+		<Submenu>
+			<p>{$_('menu.pick_lang')}:</p>
+			{#each Object.values(LANG) as lang}
+				<button
+					class=""
+					onclick={() => {
+						setLocale(lang);
+						isOptionsShown = false;
+					}}>{lang.toUpperCase()}</button
+				>
+			{/each}
+		</Submenu>
 	</div>
 {/if}
 
@@ -132,6 +174,10 @@
 					color: var(--dark-blue);
 				}
 			}
+		}
+
+		svg {
+			inline-size: 0.8rem;
 		}
 	}
 </style>

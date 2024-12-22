@@ -1,40 +1,35 @@
 <script>
 	import BannerButton from './BannerButton.svelte';
 	import ControlsBar from '$lib/components/ControlsBar.svelte';
+	import { _ } from 'svelte-i18n';
 
 	let isAbout = $state(true);
 </script>
 
 <ControlsBar gap="0">
 		<button onclick={() => (isAbout = true)} class:active={isAbout} class="px-2 text-sm uppercase">
-			ABOUT
+			{$_('about.about')}
 		</button>
 		<button
 			onclick={() => (isAbout = false)}
 			class:active={!isAbout}
 			class="px-2 text-sm uppercase"
 		>
-			HELP
+			{$_('about.help')}
 		</button>
 </ControlsBar>
 
 {#if isAbout}
 	<article class="about flex flex-col">
 		<section>
-			<h2>Disclaimer:</h2>
-			<p class="text-xs">
-				This site is a fan-created resource dedicated to <strong>Marvel Rivals</strong> and is not affiliated
-				with or endorsed by Marvel, Marvel Entertainment, or any associated entities. All trademarks,
-				logos, and images related to Marvel Rivals are the property of their respective owners. This
-				site is for informational and entertainment purposes only and operates as a free, unofficial
-				fan project. If you have concerns, please contact us.
-			</p>
+			<h2>{$_('about.disclaimer')}</h2>
+			<p class="text-xs">{$_('about.discl_descr')}</p>
 		</section>
 
 		<section>
-			<p>This is an open source project. Please consider supporting by donations:</p>
+			<p>{$_('about.h_donations')}</p>
 			<div class="flex items-center">
-				<BannerButton baseColor="#ffbb00" href="https://donatello.to/groovyboy">Donate</BannerButton
+				<BannerButton baseColor="#ffbb00" href="https://donatello.to/groovyboy">{$_('about.donate')}</BannerButton
 				>
 				<BannerButton baseColor="#ffffff" pos="center" href="https://donatello.to/groovyboy"
 					><img
@@ -47,7 +42,7 @@
 		</section>
 
 		<section>
-			<p>Technologies used:</p>
+			<p>{$_('about.h_tech')}</p>
 			<div class="flex">
 				<BannerButton baseColor="#ff0000ff" href="https://svelte.dev">SVELTE 5</BannerButton>
 				<BannerButton baseColor="#3ccf8e" href="https://supabase.com">Supabase</BannerButton>

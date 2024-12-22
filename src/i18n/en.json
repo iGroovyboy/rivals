@@ -1,0 +1,52 @@
+{
+	"class": {
+		"all": "All",
+		"vanguard": "Vanguard",
+		"duelist": "Duelist",
+		"strategist": "Strategist"
+	},
+	"menu": {
+		"tierlist": "Tierlist",
+		"suggest": "Suggest",
+		"login": "Login",
+		"logout": "Log out",
+		"pick_lang": "Pick site language"
+	},
+	"main": {
+		"header": "Counter Picks",
+		"no_heroes_data": "No heroes data found!",
+		"no_counterpicks": "No counterpicks for the hero yet!",
+		"suggest": "Suggest",
+		"some": "some"
+	},
+	"suggest": {
+		"pick_hero": "Pick a Hero",
+		"pick_counter": "Pick the hero's counterpicks",
+		"submit": "Suggest",
+		"saved": "Suggestion successfully saved!",
+		"errors": {
+			"generic_1": "Something went wrong! Please try again later!"
+		}
+	},
+	"tierlist": {
+		"heroes_tierlist": "Heroes Tierlist",
+		"default": "Default",
+		"reset": "Reset"
+	},
+	"about": {
+		"about": "About",
+		"help": "Help",
+		"disclaimer": "Disclaimer",
+		"discl_descr": "This site is a fan-created resource dedicated to Marvel Rivals and is not affiliated with or endorsed by Marvel, Marvel Entertainment, or any associated entities. All trademarks, logos, and images related to Marvel Rivals are the property of their respective owners. This site is for informational and entertainment purposes only and operates as a free, unofficial fan project. If you have concerns, please contact us.",
+		"h_donations": "This is an open source project. Please consider supporting by donations",
+		"donate": "Donate",
+		"h_tech": "Technologies used"
+	},
+	"profile": {
+		"profile": "Profile",
+		"name": "Name",
+		"errors": {
+			"generic_1": "Couldn't login! Please try again later!"
+		}
+	}
+}

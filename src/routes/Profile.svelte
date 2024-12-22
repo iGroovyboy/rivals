@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
+	import { _ } from 'svelte-i18n'
 
 	let { user, onLogout } = $props();
 </script>
@@ -10,8 +11,8 @@
 		{user.email}
 	</div>
 	<div class="">
-		<span class="text-[var(--light-grey)]">Name:</span>
+		<span class="text-[var(--light-grey)]">{$_('profile.name')}:</span>
 		{user.user_metadata.full_name}
 	</div>
-	<Button onclick={onLogout}>Log out</Button>
+	<Button onclick={onLogout}>{$_('menu.logout')}</Button>
 </div>

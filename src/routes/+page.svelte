@@ -7,6 +7,7 @@
 	import HeroAvatar from '$lib/components/HeroAvatar.svelte';
 	import { useStore } from '$lib/store.svelte';
 	import ControlsBar from '$lib/components/ControlsBar.svelte';
+	import { _ } from 'svelte-i18n';
 
 	let { data } = $props();
 
@@ -45,7 +46,7 @@
 	};
 </script>
 
-<h1>Counter Picks</h1>
+<h1><strong>Marvel Rivals</strong> {$_('main.header')}</h1>
 
 <ControlsBar gap='3'>
 		<button
@@ -109,13 +110,13 @@
 				</div>
 			{:else}
 				<div class="oops">
-					<p>No counterpicks for the hero yet!</p>
-					<p><a href="/suggest">Suggest</a> some!</p>
+					<p>{$_('main.no_counterpicks')}</p>
+					<p><a href="/suggest">{$_('main.suggest')}</a> {$_('main.some')}!</p>
 				</div>
 			{/if}
 		</div>
 	{:else}
-		<p>No heroes data found!</p>
+		<p>{$_('main.no_heroes_data')}</p>
 	{/each}
 </div>
 

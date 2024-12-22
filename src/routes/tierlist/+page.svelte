@@ -4,6 +4,7 @@
 	import HeroAvatar from '$lib/components/HeroAvatar.svelte';
 	import ControlsBar from '$lib/components/ControlsBar.svelte';
 	import { deepCloneObject } from '$lib/helpers.js';
+	import { _ } from 'svelte-i18n';
 
 	let { data } = $props();
 	const heroes: APIHeroData[] = data.heroes;
@@ -77,11 +78,11 @@
 	}
 </script>
 
-<h1><strong>Marvel Rivals</strong> Heroes Tierlist</h1>
+<h1><strong>Marvel Rivals</strong> {$_('tierlist.heroes_tierlist')}</h1>
 
 <ControlsBar gap="4">
-	<button>Default</button>
-	<button>Reset</button>
+	<button>{$_('tierlist.default')}</button>
+	<button>{$_('tierlist.reset')}</button>
 </ControlsBar>
 
 <div class="flex flex-col">
