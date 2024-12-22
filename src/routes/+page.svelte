@@ -46,8 +46,8 @@
 
 <h1>Counter Picks</h1>
 
-<div class="w-12/12 mb-4 flex h-6 2xl:w-8/12">
-	<div class="bg w-12/12 absolute -left-1 z-0 h-6 -skew-x-12 bg-[var(--black)] 2xl:w-8/12"></div>
+<div class="w-full mb-4 h-6 2xl:w-8/12">
+	<div class="bg w-full absolute -left-1 z-0 h-6 -skew-x-12 bg-[var(--black)] 2xl:w-8/12"></div>
 
 	<div class="controls relative z-10 flex w-full gap-x-3 text-[var(--white)]">
 		<button

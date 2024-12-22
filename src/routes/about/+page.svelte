@@ -4,7 +4,7 @@
 	let isAbout = $state(true);
 </script>
 
-<div class="mb-4 mt-4 h-6 w-full flex-col 2xl:w-8/12">
+<div class="mb-4 mt-4 h-6 w-full 2xl:w-8/12">
 	<div
 		class="bg absolute -left-1 z-0 h-6 w-full min-w-10 -skew-x-12 bg-[var(--black)] xl:w-8/12"
 	></div>
