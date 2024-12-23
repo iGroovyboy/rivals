@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import { dndzone } from 'svelte-dnd-action';
 	import type { APIHeroData } from '$lib';
 	import HeroAvatar from '$lib/components/HeroAvatar.svelte';
@@ -6,10 +7,13 @@
 	import { deepCloneObject } from '$lib/helpers.js';
 	import { _ } from 'svelte-i18n';
 	import { onMount } from 'svelte';
+	import { toast, TOAST_COLOR } from '$lib/toasts.svelte';
 
 	let { data } = $props();
 
 	const HEROES_LIST = 'HEROES_LIST';
+	const LS_KEY_TIERLIST = 'tierlist';
+	const URL_CUSTOM_DATA = 'custom_data';
 
 	type Row = {
 		id: string;
@@ -20,6 +24,10 @@
 
 	let rows: Row[] = $state([]);
 
+	let isUserListAvailable = $state(false);
+
+	let shareData = $state('');
+
 	function handleDndConsider(e, i) {
 		rows[i].items = e.detail.items;
 	}
@@ -29,29 +37,126 @@
 	}
 
 	const resetTierlist = () => {
-		rows = deepCloneObject(data.tierlist)
+		rows = deepCloneObject(data.tierlist);
 	};
 
 	const defaultTierlist = () => {
-		rows = deepCloneObject(data.default)
+		rows = deepCloneObject(data.default);
+	};
+
+	const saveTierlist = () => {
+		localStorage.setItem(LS_KEY_TIERLIST, JSON.stringify(rows));
+		isUserListAvailable = localStorage.getItem(LS_KEY_TIERLIST) !== null;
+	};
+
+	const tryLoadDataFromStr = (str: string, fallback: () => {}) => {
+		try {
+			const obj = JSON.parse(str);
+			rows = obj;
+			toast('Successfully loaded custom tierlist');
+		} catch (e) {
+			console.error(e);
+			fallback();
+			toast("Couldn't load custom tierlist. Using default one!", TOAST_COLOR.ORANGE);
+		}
+	};
+
+	const loadLSTierlist = () => {
+		const str = localStorage.getItem(LS_KEY_TIERLIST);
+
+		if (!str) {
+			defaultTierlist();
+			return;
+		}
+
+		tryLoadDataFromStr(str, defaultTierlist);
+	};
+
+	const shareTierlist = () => {
+		const data = encodeURIComponent(JSON.stringify(rows));
+		const url = page.url.origin + page.url.pathname + `?${URL_CUSTOM_DATA}=${data}`;
+		shareData = url;
+	};
+
+	const shareDataCopyToClipboard = () => {
+		if (!shareData.length) {
+			shareDataReset();
+			return;
+		}
+
+		navigator.clipboard
+			.writeText(shareData)
+			.then(() => {
+				toast('Text copied to clipboard!');
+				shareDataReset();
+			})
+			.catch((err) => {
+				toast("Couldn't copy text to clipboard", TOAST_COLOR.RED);
+			});
+	};
+
+	const shareDataReset = () => {
+		shareData = '';
 	};
 
 	onMount(() => {
-		defaultTierlist();
-	})
+		console.log(page.url);
+
+		isUserListAvailable = localStorage.getItem(LS_KEY_TIERLIST) !== null;
+
+		if (page.url.searchParams.get(URL_CUSTOM_DATA)?.length) {
+			console.log(
+				'detected custom data in url with length ',
+				page.url.searchParams.get(URL_CUSTOM_DATA)?.length
+			);
+
+			tryLoadDataFromStr(
+				decodeURIComponent(page.url.searchParams.get(URL_CUSTOM_DATA)),
+				defaultTierlist
+			);
+		} else {
+			loadLSTierlist();
+		}
+	});
 </script>
 
 <h1><strong>Marvel Rivals</strong> {$_('tierlist.heroes_tierlist')}</h1>
 
 <ControlsBar gap="4">
+	{#if isUserListAvailable}
+		<button onclick={loadLSTierlist}>My list</button>
+	{/if}
 	<button onclick={defaultTierlist}>{$_('tierlist.default')}</button>
+	<div class="separator mx-2 w-[4px] rounded bg-white/40"></div>
 	<button onclick={resetTierlist}>{$_('tierlist.reset')}</button>
+	<button onclick={saveTierlist}>Save</button>
+	<button onclick={shareTierlist}>Share</button>
 </ControlsBar>
+
+{#if shareData.length}
+	<div class="share my-1 flex gap-x-1">
+		<button onclick={shareDataCopyToClipboard} aria-label="Copy url to clipboard">
+			<svg class="ionicon" viewBox="0 0 512 512" fill="var(--dark-blue)"
+				><path
+					d="M456 480H136a24 24 0 01-24-24V128a16 16 0 0116-16h328a24 24 0 0124 24v320a24 24 0 01-24 24z"
+				/><path
+					d="M112 80h288V56a24 24 0 00-24-24H60a28 28 0 00-28 28v316a24 24 0 0024 24h24V112a32 32 0 0132-32z"
+				/></svg
+			>
+		</button>
+		<input
+			class="w-full bg-[var(--black)] px-1 text-[var(--white)]"
+			readonly
+			name="sharedUrl"
+			bind:value={shareData}
+		/>
+	</div>
+{/if}
 
 <div class="flex flex-col">
 	{#each rows as row, i (row.id)}
 		<section
-			class="row relative min-h-10 w-full border-b-2 border-x-2 first:border-t-2 border-black"
+			class="row relative min-h-10 w-full border-x-2 border-b-2 border-black first:border-t-2"
 			class:service={row.id === HEROES_LIST}
 		>
 			<h3
@@ -81,13 +186,17 @@
 	.service {
 		margin-top: 1rem;
 
-			.header {
-					display: none;
-			}
+		.header {
+			display: none;
+		}
 
-			ul {
-          padding: 0.21rem;
-					justify-content: center;
-			}
+		ul {
+			padding: 0.21rem;
+			justify-content: center;
+		}
+	}
+
+	svg {
+		inline-size: 1rem;
 	}
 </style>
