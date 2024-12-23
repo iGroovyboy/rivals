@@ -31,7 +31,16 @@
 	"tierlist": {
 		"heroes_tierlist": "Heroes Tierlist",
 		"default": "Default",
-		"reset": "Reset"
+		"reset": "Reset",
+		"mylist": "My list",
+		"save": "Save",
+		"share": "Share",
+		"message": {
+			"ok_loaded_custom": "Successfully loaded custom tierlist",
+			"bad_loaded_custom": "Couldn't load custom tierlist. Using default one!",
+			"ok_copy": "Url copied to clipboard!",
+			"bad_copy": "Couldn't copy url to clipboard!"
+		}
 	},
 	"about": {
 		"about": "About",

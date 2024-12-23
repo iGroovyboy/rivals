@@ -53,11 +53,11 @@
 		try {
 			const obj = JSON.parse(str);
 			rows = obj;
-			toast('Successfully loaded custom tierlist');
+			toast($_('tierlist.message.ok_loaded_custom'));
 		} catch (e) {
 			console.error(e);
 			fallback();
-			toast("Couldn't load custom tierlist. Using default one!", TOAST_COLOR.ORANGE);
+			toast($_('tierlist.message.bad_loaded_custom'), TOAST_COLOR.ORANGE);
 		}
 	};
 
@@ -87,11 +87,11 @@
 		navigator.clipboard
 			.writeText(shareData)
 			.then(() => {
-				toast('Text copied to clipboard!');
+				toast($_('tierlist.message.ok_copy'));
 				shareDataReset();
 			})
 			.catch((err) => {
-				toast("Couldn't copy text to clipboard", TOAST_COLOR.RED);
+				toast($_('tierlist.message.bad_copy'), TOAST_COLOR.RED);
 			});
 	};
 
@@ -124,13 +124,13 @@
 
 <ControlsBar gap="4">
 	{#if isUserListAvailable}
-		<button onclick={loadLSTierlist}>My list</button>
+		<button onclick={loadLSTierlist}>{$_('tierlist.mylist')}</button>
 	{/if}
 	<button onclick={defaultTierlist}>{$_('tierlist.default')}</button>
 	<div class="separator mx-2 w-[4px] rounded bg-white/40"></div>
 	<button onclick={resetTierlist}>{$_('tierlist.reset')}</button>
-	<button onclick={saveTierlist}>Save</button>
-	<button onclick={shareTierlist}>Share</button>
+	<button onclick={saveTierlist}>{$_('tierlist.save')}</button>
+	<button onclick={shareTierlist}>{$_('tierlist.share')}</button>
 </ControlsBar>
 
 {#if shareData.length}
