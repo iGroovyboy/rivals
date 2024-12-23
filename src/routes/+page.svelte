@@ -94,16 +94,31 @@
 			{#if hero.counterpicks}
 				<div class="counterpicks flex flex-col justify-around">
 					{#each Object.entries(hero.counterpicks) as [heroClass, heroesList]}
-						<div class="flex items-center gap-x-2">
+						<div class="flex ">
 							{#if heroesList.length}
 								<ClassAvatar classname={heroClass} />
-								<ul class="counters flex gap-x-2">
-									{#each heroesList as counterHero}
-										<li>
-											<HeroAvatar name={counterHero.name} classname={counterHero.class} />
-										</li>
-									{/each}
-								</ul>
+
+								<div class="flex">
+									<ul class="counters-main ml-1 flex items-center relative">
+										{#each heroesList.slice(0, 3) as counterHero}
+											<li>
+												<HeroAvatar name={counterHero.name} classname={counterHero.class} />
+											</li>
+										{/each}
+									</ul>
+
+									{#if heroesList.slice(3).length}
+										<ul class="counters-extra ml-1">
+											{#each heroesList.slice(3) as counterHero}
+												<li class="flex items-center justify-center w-5 h-4">
+													<HeroAvatar autosize name={counterHero.name} classname={counterHero.class} />
+												</li>
+											{/each}
+										</ul>
+									{/if}
+								</div>
+
+
 							{/if}
 						</div>
 					{/each}
@@ -137,5 +152,12 @@
 
 	svg {
 		inline-size: 0.8rem;
+	}
+
+  .counters-extra {
+      display: grid;
+      grid-template-rows: repeat(2, auto);
+      grid-auto-flow: column;
+			column-gap: 0.1rem;
 	}
 </style>
