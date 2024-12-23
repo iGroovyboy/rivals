@@ -60,18 +60,18 @@
 					d="M240 240H32V32h208zM480 240H272V32h208zM240 480H32V272h208zM480 480H272V272h208z"
 				/></svg
 			>
-			Grid
+			{$_('main.grid')}
 		</button>
 
 		<div class="flex items-center gap-x-1 px-2">
 			<input type="checkbox" name="fav" id="fav" class="h-3 w-3" bind:checked={isFavoritesOn} />
-			<label for="fav" class="text-sm uppercase">FAVORITES</label>
+			<label for="fav" class="text-sm uppercase">{$_('main.favorites')}</label>
 		</div>
 
 		<div
 			class="search -mt-0.5 mr-0.5 flex h-6 w-full -skew-x-12 items-center justify-between bg-[var(--light-grey)]"
 		>
-			<label class="mx-4 uppercase text-[var(--black)]" for="search">Filter</label>
+			<label class="mx-4 uppercase text-[var(--black)]" for="search">{$_('main.filter')}</label>
 			<div class="decor mr-0.5 h-full min-w-[4px] bg-[var(--white)]"></div>
 			<div class="decor mr-0.5 h-full min-w-[4px] bg-[var(--white)]"></div>
 			<input
