@@ -1,11 +1,17 @@
 import { addMessages, init, getLocaleFromNavigator, locale, waitLocale } from 'svelte-i18n';
 import en from './en.json';
+import es from './es.json';
+import hi from './hi.json';
 import ru from './ru.json';
 import uk from './uk.json';
+import zh from './zh.json';
 
 addMessages('en', en);
+addMessages('es', es);
 addMessages('ru', ru);
+addMessages('hi', hi);
 addMessages('uk', uk);
+addMessages('zh', zh);
 
 init({
 	fallbackLocale: 'en',
@@ -22,8 +28,11 @@ export const initI18N = async () => {
 
 export enum LANG {
 	EN = 'en',
+	ES = 'es',
 	RU = 'ru',
-	UK = 'uk'
+	HI = 'hi',
+	UK = 'uk',
+	ZH = 'zh'
 }
 
 export type AVAILABLE_LANG = keyof typeof LANG;

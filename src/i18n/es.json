@@ -1,0 +1,64 @@
+{
+  "class": {
+    "all": "Todos",
+    "vanguard": "Vanguardia",
+    "duelist": "Duelista",
+    "strategist": "Estratega"
+  },
+  "menu": {
+    "tierlist": "Lista de niveles",
+    "suggest": "Sugerir",
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión",
+    "pick_lang": "Seleccionar idioma del sitio"
+  },
+  "main": {
+    "header": "Selecciones de contraataque",
+    "no_heroes_data": "¡No se encontraron datos de héroes!",
+    "no_counterpicks": "¡Aún no hay selecciones de contraataque para el héroe!",
+    "suggest": "Sugerir",
+    "some": "algunos",
+    "grid": "Cuadrícula",
+    "favorites": "FAVORITOS",
+    "filter": "Filtrar"
+  },
+  "suggest": {
+    "pick_hero": "Selecciona un héroe",
+    "pick_counter": "Elige las opciones de contraataque del héroe",
+    "submit": "Sugerir",
+    "saved": "¡Sugerencia guardada con éxito!",
+    "errors": {
+      "generic_1": "¡Algo salió mal! ¡Por favor, inténtalo de nuevo más tarde!"
+    }
+  },
+  "tierlist": {
+    "heroes_tierlist": "Lista de niveles de los héroes",
+    "default": "Predeterminado",
+    "reset": "Restablecer",
+    "mylist": "Mi lista",
+    "save": "Guardar",
+    "share": "Compartir",
+    "message": {
+      "ok_loaded_custom": "Lista de niveles personalizada cargada con éxito",
+      "bad_loaded_custom": "No se pudo cargar la lista de niveles personalizada. ¡Se está usando la predeterminada!",
+      "ok_copy": "¡URL copiada al portapapeles!",
+      "bad_copy": "¡No se pudo copiar la URL al portapapeles!"
+    }
+  },
+  "about": {
+    "about": "Acerca de",
+    "help": "Ayuda",
+    "disclaimer": "Descargo de responsabilidad",
+    "discl_descr": "Este sitio es un recurso creado por fans dedicado a Marvel Rivals y no está afiliado ni respaldado por Marvel, Marvel Entertainment ni ninguna entidad asociada. Todas las marcas comerciales, logotipos e imágenes relacionadas con Marvel Rivals son propiedad de sus respectivos dueños. Este sitio es solo para fines informativos y de entretenimiento y funciona como un proyecto gratuito y no oficial para fans. Si tienes inquietudes, contáctanos.",
+    "h_donations": "Este es un proyecto de código abierto. Por favor, considera apoyar con donaciones",
+    "donate": "Donar",
+    "h_tech": "Tecnologías utilizadas"
+  },
+  "profile": {
+    "profile": "Perfil",
+    "name": "Nombre",
+    "errors": {
+      "generic_1": "¡No se pudo iniciar sesión! ¡Por favor, inténtalo de nuevo más tarde!"
+    }
+  }
+}

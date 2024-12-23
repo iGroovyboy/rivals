@@ -1,0 +1,64 @@
+{
+  "class": {
+    "all": "全部",
+    "vanguard": "先锋",
+    "duelist": "决斗者",
+    "strategist": "战略家"
+  },
+  "menu": {
+    "tierlist": "等级列表",
+    "suggest": "建议",
+    "login": "登录",
+    "logout": "退出",
+    "pick_lang": "选择网站语言"
+  },
+  "main": {
+    "header": "反选",
+    "no_heroes_data": "未找到英雄数据！",
+    "no_counterpicks": "尚未找到该英雄的反选！",
+    "suggest": "建议",
+    "some": "一些",
+    "grid": "网格",
+    "favorites": "收藏夹",
+    "filter": "筛选"
+  },
+  "suggest": {
+    "pick_hero": "选择一个英雄",
+    "pick_counter": "选择英雄的反选",
+    "submit": "建议",
+    "saved": "建议已成功保存！",
+    "errors": {
+      "generic_1": "出现错误！请稍后重试！"
+    }
+  },
+  "tierlist": {
+    "heroes_tierlist": "英雄等级列表",
+    "default": "默认",
+    "reset": "重置",
+    "mylist": "我的列表",
+    "save": "保存",
+    "share": "分享",
+    "message": {
+      "ok_loaded_custom": "已成功加载自定义等级列表",
+      "bad_loaded_custom": "无法加载自定义等级列表。使用默认等级列表！",
+      "ok_copy": "网址已复制到剪贴板！",
+      "bad_copy": "无法将网址复制到剪贴板！"
+    }
+  },
+  "about": {
+    "about": "关于",
+    "help": "帮助",
+    "disclaimer": "免责声明",
+    "discl_descr": "本网站是专门为 Marvel Rivals 而设的粉丝资源，与 Marvel、Marvel Entertainment 或任何相关实体没有任何关联或认可。与 Marvel Rivals 相关的所有商标、徽标和图像均归其各自所有者所有。本网站仅供参考和娱乐之用，并作为免费的非官方粉丝项目运营。如果您有任何疑问，请联系我们。",
+    "h_donations": "这是一个开源项目。请考虑通过捐赠来支持",
+    "donate": "捐赠",
+    "h_tech": "使用的技术"
+  },
+  "profile": {
+    "profile": "个人资料",
+    "name": "姓名",
+    "errors": {
+      "generic_1": "无法登录！请稍后重试！"
+    }
+  }
+}
