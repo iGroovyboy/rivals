@@ -5,9 +5,9 @@
 	import ControlsBar from '$lib/components/ControlsBar.svelte';
 	import { deepCloneObject } from '$lib/helpers.js';
 	import { _ } from 'svelte-i18n';
+	import { onMount } from 'svelte';
 
 	let { data } = $props();
-	const heroes: APIHeroData[] = data.heroes;
 
 	const HEROES_LIST = 'HEROES_LIST';
 
@@ -18,56 +18,7 @@
 		items: APIHeroData[];
 	};
 
-	let rows: Row[] = $state([
-		{
-			id: 'S',
-			text: 'S',
-			color: 'rgb(255, 127, 127)',
-			items: []
-		},
-		{
-			id: 'A',
-			text: 'A',
-			color: 'rgb(255, 191, 127)',
-			items: []
-		},
-		{
-			id: 'B',
-			text: 'B',
-			color: 'rgb(255, 223, 127)',
-			items: []
-		},
-		{
-			id: 'C',
-			text: 'C',
-			color: 'rgb(255, 255, 127)',
-			items: []
-		},
-		{
-			id: 'D',
-			text: 'D',
-			color: 'rgb(191, 255, 127)',
-			items: []
-		},
-		{
-			id: 'E',
-			text: 'E',
-			color: 'rgb(127, 255, 127)',
-			items: []
-		},
-		{
-			id: 'F',
-			text: 'F',
-			color: 'rgb(127, 255, 255)',
-			items: []
-		},
-		{
-			id: HEROES_LIST,
-			text: 'HEROES',
-			color: 'rgb(255, 255, 255)',
-			items: deepCloneObject(heroes)  || []
-		}
-	]);
+	let rows: Row[] = $state([]);
 
 	function handleDndConsider(e, i) {
 		rows[i].items = e.detail.items;
@@ -76,13 +27,25 @@
 	function handleDndFinalize(e, i) {
 		rows[i].items = e.detail.items;
 	}
+
+	const resetTierlist = () => {
+		rows = deepCloneObject(data.tierlist)
+	};
+
+	const defaultTierlist = () => {
+		rows = deepCloneObject(data.default)
+	};
+
+	onMount(() => {
+		defaultTierlist();
+	})
 </script>
 
 <h1><strong>Marvel Rivals</strong> {$_('tierlist.heroes_tierlist')}</h1>
 
 <ControlsBar gap="4">
-	<button>{$_('tierlist.default')}</button>
-	<button>{$_('tierlist.reset')}</button>
+	<button onclick={defaultTierlist}>{$_('tierlist.default')}</button>
+	<button onclick={resetTierlist}>{$_('tierlist.reset')}</button>
 </ControlsBar>
 
 <div class="flex flex-col">
