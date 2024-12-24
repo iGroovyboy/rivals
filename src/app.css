@@ -26,3 +26,7 @@ button {
 		color: var(--highlight);
 	}
 }
+
+svg {
+	inline-size: 1rem;
+}

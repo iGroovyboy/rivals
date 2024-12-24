@@ -1,0 +1,120 @@
+<script lang="ts">
+	import { supabaseGetUser, supabaseLogin, supabaseLogout } from '$lib/auth.svelte.ts';
+	import { LANG, setLocale } from '../../../i18n/i18n.ts';
+	import { locale } from 'svelte-i18n';
+	import SvgIcon from '$lib/components/SvgIcon.svelte';
+	import { page } from '$app/state';
+	import { _ } from 'svelte-i18n';
+	import { goto } from '$app/navigation';
+
+	let { user } = $props();
+
+	let currentRoute = $derived(page.route.id || '');
+
+	let isMenuShown = $state(false);
+
+	const login = () => {
+		supabaseLogin()
+	};
+
+	const logout = async () => {
+		await supabaseLogout();
+		user = await supabaseGetUser();
+		isMenuShown = false;
+	};
+
+	const action = (name: string, ...args) => {
+		isMenuShown = false;
+
+		switch (name) {
+			case 'fn':
+				if (args[0] && typeof args[0] === 'function') {
+					args[0]()
+				}
+				break;
+			case 'goto':
+				goto(args[0]);
+				break;
+			default:
+				break;
+		}
+	};
+</script>
+
+<nav
+	class="bot_nav_mobile fixed bottom-0 left-0 z-50 flex w-full flex-col
+	bg-[var(--black)] text-[var(--white)] md:hidden"
+>
+	<ul class:hidden={!isMenuShown} class="menu flex flex-col">
+		<li class="flex items-center border-b-2 border-white/30 p-2">
+			{#if !user}
+				<button class="flex items-center gap-x-1" onclick={() => action('fn', login)}
+					><img src="/icons/web_dark_sq_na.svg" alt="Google icon" />{$_('menu.login')}</button
+				>
+			{:else}
+				<button
+					class="relative flex items-center gap-x-1"
+					onclick={() => action('fn', logout)}
+					><img
+						class="flex h-4"
+						src={user?.user_metadata?.avatar_url}
+						onerror={(this.src = '/icons/person-circle-outline.svg')}
+						alt="User avatar"
+					/>{$_('profile.profile')}</button
+				>
+			{/if}
+		</li>
+		<li class="flex items-center gap-x-2 border-b-2 border-white/30 p-2">
+			<ul class="flex w-full justify-between">
+				{#each Object.values(LANG) as lang}
+					<li class:active={$locale?.toLowerCase() === lang.toLowerCase()}>
+						<button
+							class=""
+							onclick={() => {
+								setLocale(lang);
+							}}>{lang.toUpperCase()}</button
+						>
+					</li>
+				{/each}
+			</ul>
+		</li>
+		<li class="flex items-center p-2">
+			<button onclick={() => action('goto', '/about')}>Help</button>
+		</li>
+	</ul>
+
+	<ul class="flex h-7 w-full">
+		<li class="flex w-1/4 items-center justify-center" class:active={currentRoute === '/'}>
+			<button onclick={() => action('goto', '/')}
+				><SvgIcon icon="HOME" active={currentRoute === '/'} /></button
+			>
+		</li>
+		<li class="flex w-1/4 items-center justify-center" class:active={currentRoute === '/suggest'}>
+			<button onclick={() => action('goto', '/suggest')}
+				><SvgIcon icon="SUGGEST" active={currentRoute === '/suggest'} /></button
+			>
+		</li>
+		<li class="flex w-1/4 items-center justify-center" class:active={currentRoute === '/tierlist'}>
+			<button onclick={() => action('goto', '/tierlist')}
+				><SvgIcon icon="LIST" active={currentRoute === '/tierlist'} /></button
+			>
+		</li>
+		<li class="flex w-1/4 items-center justify-center">
+			<button onclick={() => (isMenuShown = !isMenuShown)} aria-label="Menu"
+				><SvgIcon icon="MENU" /></button
+			>
+		</li>
+	</ul>
+</nav>
+
+<style>
+	nav {
+		li.active {
+			background-color: var(--highlight);
+
+			* {
+				color: var(--dark-blue);
+			}
+		}
+	}
+</style>

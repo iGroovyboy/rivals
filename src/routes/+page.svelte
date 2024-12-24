@@ -50,7 +50,7 @@
 
 <ControlsBar gap='3'>
 		<button
-			class="flex items-center gap-x-0.5 text-sm uppercase"
+			class="hidden md:flex items-center gap-x-0.5 text-sm uppercase"
 			onclick={() => (isLayoutGrid = !isLayoutGrid)}
 		>
 			<svg
