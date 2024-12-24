@@ -89,36 +89,47 @@
 
 <div class="list relative flex flex-col" class:isLayoutGrid>
 	{#each filteredHeroes as hero}
-		<div class="cell mb-4 flex w-[48%] gap-x-4">
-			<HeroBigAvatar name={hero.name} classname={hero.class} isFavShown />
+		<div class="cell relative mb-4 flex gap-x-0.5 pb-4 md:w-[48%] md:gap-x-4">
+			<div class="w-4/12 md:w-auto">
+				<HeroBigAvatar name={hero.name} classname={hero.class} isFavShown />
+			</div>
+
 			{#if hero.counterpicks}
-				<div class="counterpicks flex flex-col justify-around">
+				<div class="counterpicks flex w-8/12 flex-col justify-around gap-y-1 md:gap-y-0">
 					{#each Object.entries(hero.counterpicks) as [heroClass, heroesList]}
-						<div class="flex ">
+						<div class="flex">
 							{#if heroesList.length}
 								<ClassAvatar classname={heroClass} />
 
-								<div class="flex">
-									<ul class="counters-main ml-1 flex items-center relative">
+								<div class="flex flex-col md:flex-row">
+									<ul class="counters-main relative ml-0.5 flex items-center gap-x-0.5 md:ml-1">
 										{#each heroesList.slice(0, 3) as counterHero}
-											<li>
-												<HeroAvatar name={counterHero.name} classname={counterHero.class} />
+											<li class="flex w-4/12 items-center justify-center md:w-6">
+												<HeroAvatar
+													autosize
+													name={counterHero.name}
+													classname={counterHero.class}
+												/>
 											</li>
 										{/each}
 									</ul>
 
 									{#if heroesList.slice(3).length}
-										<ul class="counters-extra ml-1">
+										<ul
+											class="counters-extra ml-0.5 mt-0.5 opacity-50 md:ml-1 md:mt-0 md:opacity-70"
+										>
 											{#each heroesList.slice(3) as counterHero}
-												<li class="flex items-center justify-center w-5 h-4">
-													<HeroAvatar autosize name={counterHero.name} classname={counterHero.class} />
+												<li class="flex w-5 md:h-4 md:w-5 md:items-center md:justify-center">
+													<HeroAvatar
+														autosize
+														name={counterHero.name}
+														classname={counterHero.class}
+													/>
 												</li>
 											{/each}
 										</ul>
 									{/if}
 								</div>
-
-
 							{/if}
 						</div>
 					{/each}
@@ -154,10 +165,22 @@
 		inline-size: 0.8rem;
 	}
 
-  .counters-extra {
-      display: grid;
-      grid-template-rows: repeat(2, auto);
-      grid-auto-flow: column;
-			column-gap: 0.1rem;
+	.counters-extra {
+		display: grid;
+		grid-template-rows: repeat(2, auto);
+		grid-auto-flow: column;
+		column-gap: 0.1rem;
+	}
+
+	.cell::after {
+		position: absolute;
+		content: '';
+		width: 140%;
+		height: 2px;
+		background: var(--dark-blue);
+		opacity: 0.3;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%) skewY(-6deg);
 	}
 </style>

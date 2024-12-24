@@ -25,7 +25,7 @@ const onLogout = async () => {
 </script>
 
 <nav
-	class="nav_desktop z-50 hidden h-7 w-full justify-between bg-[var(--black)] text-[var(--white)] md:flex"
+	class="nav_desktop fixed z-50 hidden h-7 w-full justify-between bg-[var(--black)] text-[var(--white)] md:flex"
 >
 	<div class="title mx-2 flex w-1/12 justify-center">[R-C-P]</div>
 	<div class="menu flex w-11/12 flex-row justify-between px-6">

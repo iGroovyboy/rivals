@@ -28,8 +28,8 @@
 
 <NavDesktop {user} />
 
-<div class="wrapper z-0 mx-auto w-11/12 pt-8 md:w-9/12">
-	<!--{@render children()}-->
+<div class="wrapper z-0 mx-auto w-full pt-8 md:w-9/12 overflow-hidden">
+	{@render children()}
 </div>
 
 <Toasts />

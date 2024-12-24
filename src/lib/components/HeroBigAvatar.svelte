@@ -11,9 +11,9 @@
 	};
 </script>
 
-<div class="hero-big-avatar relative">
-	<div class="frame">
-		<img src="/icons/{classname}/{iconFilename(name)}" alt={name} />
+<div class="hero-big-avatar">
+	<div class="frame w-full md:w-[240px] max-w-[240px] max-h-[440px] overflow-hidden">
+		<img class="" src="/icons/{classname}/{iconFilename(name)}" alt={name} />
 	</div>
 	{#if isFavShown}
 	<div class="absolute left-1 top-3">
@@ -22,16 +22,4 @@
 	{/if}
 </div>
 
-<style>
-	.hero-big-avatar {
-		.frame {
-			width: 240px;
-			height: 440px;
-			overflow: hidden;
-
-			img {
-				height: 100%;
-			}
-		}
-	}
-</style>
+<style></style>
