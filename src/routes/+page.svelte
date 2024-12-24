@@ -48,6 +48,7 @@
 
 <h1><strong>Marvel Rivals</strong> {$_('main.header')}</h1>
 
+<div class="sticky flex z-20 top-3 left-0 md:static overflow-hidden">
 <ControlsBar gap='3'>
 		<button
 			class="hidden md:flex items-center gap-x-0.5 text-sm uppercase"
@@ -63,17 +64,17 @@
 			{$_('main.grid')}
 		</button>
 
-		<div class="flex items-center gap-x-1 px-2">
+		<div class="hidden md:flex items-center gap-x-1 px-2">
 			<input type="checkbox" name="fav" id="fav" class="h-3 w-3" bind:checked={isFavoritesOn} />
 			<label for="fav" class="text-sm uppercase">{$_('main.favorites')}</label>
 		</div>
 
 		<div
-			class="search -mt-0.5 mr-0.5 flex h-6 w-full -skew-x-12 items-center justify-between bg-[var(--light-grey)]"
+			class="search md:-mt-0.5 md:mr-0.5 flex h-6 w-full md:-skew-x-12 items-center justify-between bg-[var(--light-grey)]"
 		>
-			<label class="mx-4 uppercase text-[var(--black)]" for="search">{$_('main.filter')}</label>
-			<div class="decor mr-0.5 h-full min-w-[4px] bg-[var(--white)]"></div>
-			<div class="decor mr-0.5 h-full min-w-[4px] bg-[var(--white)]"></div>
+			<label class="mx-2 md:mx-4 uppercase text-[var(--black)]" for="search">{$_('main.filter')}</label>
+			<div class="decor hidden md:flex mr-0.5 h-full min-w-[4px] bg-[var(--white)]"></div>
+			<div class="decor hidden md:flex mr-0.5 h-full min-w-[4px] bg-[var(--white)]"></div>
 			<input
 				class="h-6 w-10/12 px-1 pr-6 text-[var(--black)] outline-0"
 				type="text"
@@ -86,8 +87,9 @@
 			</button>
 		</div>
 </ControlsBar>
+</div>
 
-<div class="list relative flex flex-col" class:isLayoutGrid>
+<div class="list relative flex flex-col overflow-hidden" class:isLayoutGrid>
 	{#each filteredHeroes as hero}
 		<div class="cell relative mb-4 flex gap-x-0.5 pb-4 md:w-[48%] md:gap-x-4">
 			<div class="w-4/12 md:w-auto">
