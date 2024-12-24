@@ -7,7 +7,7 @@
 </script>
 
 <div
-	class="toasts pointer-events-none fixed bottom-0 flex w-full flex-col items-end gap-y-1 p-2"
+	class="toasts z-[45] pointer-events-none fixed bottom-0 flex w-full flex-col items-end gap-y-1 pb-6 p-1 md:p-2"
 >
 	{#each useToasts.toasts as toast}
 		<div

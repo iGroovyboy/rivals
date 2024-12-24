@@ -49,7 +49,9 @@
 	};
 </script>
 
-<div class="flex justify-between">
+<h1><strong>Marvel Rivals</strong> Suggest Counterpicks</h1>
+
+<div class="flex flex-col md:flex-row justify-between overflow-hidden">
 	<div class="flex flex-col">
 		<h2 class="w-full text-center">{$_('suggest.pick_hero')}</h2>
 
@@ -57,7 +59,7 @@
 	</div>
 
 	<div class="splitter mt-6 opacity-45">
-		<img src="/img/vertical-line.svg" alt="decoration" />
+		<img class="hidden md:static " src="/img/vertical-line.svg" alt="decoration" />
 	</div>
 
 	<div class="flex flex-col">
@@ -67,6 +69,6 @@
 	</div>
 </div>
 
-<div class="flex justify-center">
+<div class="flex justify-center mb-12">
 	<Button disabled={isLoading || !canSave} onclick={save}>{$_('suggest.submit')}</Button>
 </div>

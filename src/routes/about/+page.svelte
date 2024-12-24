@@ -6,6 +6,8 @@
 	let isAbout = $state(true);
 </script>
 
+<h1>About Marvel Rivals Counterpicks</h1>
+
 <ControlsBar gap="0">
 		<button onclick={() => (isAbout = true)} class:active={isAbout} class="px-2 text-sm uppercase">
 			{$_('about.about')}
