@@ -34,6 +34,7 @@ jobs:
           PUBLIC_API_URL: '${{ vars.PUBLIC_API_URL }}'
           PUBLIC_API_KEY: '${{ vars.PUBLIC_API_KEY }}'
         run: |
+          echo "${{secrets.RIVALS_ENV}}" > .env
           npm run build
 
       - name: Upload Artifacts
