@@ -9,4 +9,5 @@ export const load: LayoutLoad = async () => {
 	};
 };
 
-export const ssr = false;
+export const prerender = false;
+// export const ssr = false;

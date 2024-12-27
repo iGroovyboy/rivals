@@ -31,8 +31,8 @@ jobs:
       - name: Build
         env:
           BASE_PATH: '/${{ github.event.repository.name }}'
-          PUBLIC_API_URL: '/${{ vars.PUBLIC_API_URL }}'
-          PUBLIC_API_KEY: '/${{ vars.PUBLIC_API_KEY }}'
+          PUBLIC_API_URL: '${{ vars.PUBLIC_API_URL }}'
+          PUBLIC_API_KEY: '${{ vars.PUBLIC_API_KEY }}'
         run: |
           npm run build
 
