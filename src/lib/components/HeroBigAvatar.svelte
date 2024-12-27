@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Star from '$lib/components/Star.svelte';
 	import { useStore } from '$lib/store.svelte';
+	import { base } from '$app/paths';
 
 	let { name, classname, isFavShown } = $props();
 
@@ -13,7 +14,7 @@
 
 <div class="hero-big-avatar">
 	<div class="frame w-full md:w-[240px] max-w-[240px] max-h-[440px] overflow-hidden">
-		<img class="" src="/icons/{classname}/{iconFilename(name)}" alt={name} />
+		<img class="" src="{base}/icons/{classname}/{iconFilename(name)}" alt={name} />
 	</div>
 	{#if isFavShown}
 	<div class="absolute left-1 top-3">

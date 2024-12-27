@@ -6,6 +6,7 @@
 	import { page } from '$app/state';
 	import { _ } from 'svelte-i18n';
 	import { goto } from '$app/navigation';
+	import { base } from '$app/paths';
 
 	let { user } = $props();
 
@@ -49,7 +50,7 @@
 		<li class="flex items-center border-b-2 border-white/30 p-2">
 			{#if !user}
 				<button class="flex w-full items-center gap-x-1" onclick={() => action('fn', login)}
-					><img src="/icons/web_dark_sq_na.svg" alt="Google icon" />{$_('menu.login')}</button
+					><img src="{base}/icons/web_dark_sq_na.svg" alt="Google icon" />{$_('menu.login')}</button
 				>
 			{:else}
 				<button
@@ -58,7 +59,7 @@
 					><img
 						class="flex h-4"
 						src={user?.user_metadata?.avatar_url}
-						onerror={(this.src = '/icons/person-circle-outline.svg')}
+						onerror={(this.src = '{base}/icons/person-circle-outline.svg')}
 						alt="User avatar"
 					/>{$_('profile.profile')}</button
 				>
@@ -79,23 +80,23 @@
 			</ul>
 		</li>
 		<li class="flex items-center p-2">
-			<button class="w-full text-left" onclick={() => action('goto', '/about')}>Help</button>
+			<button class="w-full text-left" onclick={() => action('goto', base + '/about')}>Help</button>
 		</li>
 	</ul>
 
 	<ul class="flex h-7 w-full">
 		<li class="flex w-1/4 items-center justify-center" class:active={currentRoute === '/'}>
-			<button class="flex w-full justify-center" onclick={() => action('goto', '/')}
+			<button class="flex w-full justify-center" onclick={() => action('goto', base + '/')}
 				><SvgIcon icon="HOME" active={currentRoute === '/'} /></button
 			>
 		</li>
 		<li class="flex w-1/4 items-center justify-center" class:active={currentRoute === '/suggest'}>
-			<button class="flex w-full justify-center" onclick={() => action('goto', '/suggest')}
+			<button class="flex w-full justify-center" onclick={() => action('goto', base + '/suggest')}
 				><SvgIcon icon="SUGGEST" active={currentRoute === '/suggest'} /></button
 			>
 		</li>
 		<li class="flex w-1/4 items-center justify-center" class:active={currentRoute === '/tierlist'}>
-			<button class="flex w-full justify-center" onclick={() => action('goto', '/tierlist')}
+			<button class="flex w-full justify-center" onclick={() => action('goto', base + '/tierlist')}
 				><SvgIcon icon="LIST" active={currentRoute === '/tierlist'} /></button
 			>
 		</li>

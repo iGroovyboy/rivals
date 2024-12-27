@@ -2,6 +2,7 @@
 import { CLASS } from '$lib';
 import SvgIcon from '$lib/components/SvgIcon.svelte';
 import { page } from '$app/state';
+import { base } from '$app/paths';
 
 let currentClass = $derived(page.url.searchParams.get('class') || CLASS.ALL);
 
@@ -14,7 +15,7 @@ let currentRoute = $derived(page.route.id || '');
 >
 	<ul class="flex w-full h-full">
 		<li class="flex w-1/4 items-center justify-center" class:active={currentClass === CLASS.ALL}>
-			<a class="flex justify-center w-full" href="/?class={CLASS.ALL}"
+			<a class="flex justify-center w-full" href="{base}/?class={CLASS.ALL}"
 			><SvgIcon icon="CLASS_ALL" active={currentClass === CLASS.ALL} /></a
 			>
 		</li>
@@ -22,7 +23,7 @@ let currentRoute = $derived(page.route.id || '');
 			class="flex w-1/4 items-center justify-center"
 			class:active={currentClass === CLASS.VANGUARD}
 		>
-			<a class="flex justify-center w-full" href="/?class={CLASS.VANGUARD}"
+			<a class="flex justify-center w-full" href="{base}/?class={CLASS.VANGUARD}"
 			><SvgIcon icon="CLASS_VANGUARD" active={currentClass === CLASS.VANGUARD} /></a
 			>
 		</li>
@@ -30,7 +31,7 @@ let currentRoute = $derived(page.route.id || '');
 			class="flex w-1/4 items-center justify-center"
 			class:active={currentClass === CLASS.DUELIST}
 		>
-			<a class="flex justify-center w-full" href="/?class={CLASS.DUELIST}"
+			<a class="flex justify-center w-full" href="{base}/?class={CLASS.DUELIST}"
 			><SvgIcon icon="CLASS_DUELIST" active={currentClass === CLASS.DUELIST} /></a
 			>
 		</li>
@@ -38,7 +39,7 @@ let currentRoute = $derived(page.route.id || '');
 			class="flex w-1/4 items-center justify-center"
 			class:active={currentClass === CLASS.STRATEGIST}
 		>
-			<a class="flex justify-center w-full" href="/?class={CLASS.STRATEGIST}"
+			<a class="flex justify-center w-full" href="{base}/?class={CLASS.STRATEGIST}"
 			><SvgIcon icon="CLASS_STRATEGIST" active={currentClass === CLASS.STRATEGIST} /></a
 			>
 		</li>

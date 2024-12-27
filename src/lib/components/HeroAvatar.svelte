@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Classname } from '$lib';
+	import { base } from '$app/paths';
 
 	interface Props {
 		name: string;
@@ -22,7 +23,7 @@
 		class="frame flex cursor-pointer items-center border-[var(--dark-blue)] bg-transparent hover:border-y-2"
 		{onclick}
 	>
-		<img class="w-full" src="/icons/{classname}/{iconFilename(name)}" alt={name} />
+		<img class="w-full" src="{base}/icons/{classname}/{iconFilename(name)}" alt={name} />
 	</button>
 </div>
 

@@ -8,6 +8,7 @@
 	import { useStore } from '$lib/store.svelte';
 	import ControlsBar from '$lib/components/ControlsBar.svelte';
 	import { _ } from 'svelte-i18n';
+	import { base } from '$app/paths';
 
 	let { data } = $props();
 
@@ -83,7 +84,7 @@
 				bind:value={searchText}
 			/>
 			<button class="absolute right-0 w-4 cursor-pointer bg-transparent" onclick={clearFilter}>
-				<img src="/icons/close-outline.svg" alt="Clear filter" />
+				<img src="{base}/icons/close-outline.svg" alt="Clear filter" />
 			</button>
 		</div>
 </ControlsBar>
@@ -139,7 +140,7 @@
 			{:else}
 				<div class="oops">
 					<p>{$_('main.no_counterpicks')}</p>
-					<p><a href="/suggest">{$_('main.suggest')}</a> {$_('main.some')}!</p>
+					<p><a href="{base}/suggest">{$_('main.suggest')}</a> {$_('main.some')}!</p>
 				</div>
 			{/if}
 		</div>
