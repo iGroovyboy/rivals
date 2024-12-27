@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { type APIHeroData, filterableClasses } from '$lib';
 	import { filterHeroesByClass } from '$lib/helpers';
 	import HeroBigAvatar from '$lib/components/HeroBigAvatar.svelte';
@@ -13,7 +13,7 @@
 
 	let searchText = $state('');
 
-	let currentClass = $derived($page.url.searchParams.get('class') || '');
+	let currentClass = $derived(page.url.searchParams.get('class') || '');
 
 	let canFilterByClass = $derived(filterableClasses.includes(currentClass));
 
