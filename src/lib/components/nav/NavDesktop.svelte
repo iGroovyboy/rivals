@@ -6,6 +6,7 @@ import { page } from '$app/state';
 import { _ } from 'svelte-i18n';
 import Profile from '../../../routes/Profile.svelte';
 import { LANG, setLocale } from '../../../i18n/i18n.ts';
+import { base } from '$app/paths';
 
 let { user } = $props();
 
@@ -32,26 +33,26 @@ const onLogout = async () => {
 		<div class="start">
 			<ul class="flex h-full">
 				<li class="flex items-center px-2" class:active={currentClass === CLASS.ALL}>
-					<a class="capitalize" href="/?class={CLASS.ALL}">{$_('class.all')}</a>
+					<a class="capitalize" href="{base}/?class={CLASS.ALL}">{$_('class.all')}</a>
 				</li>
 				<li class="flex items-center px-2" class:active={currentClass === CLASS.VANGUARD}>
-					<a class="flex capitalize" href="/?class={CLASS.VANGUARD}">{$_('class.vanguard')}</a>
+					<a class="flex capitalize" href="{base}/?class={CLASS.VANGUARD}">{$_('class.vanguard')}</a>
 				</li>
 				<li class="flex items-center px-2" class:active={currentClass === CLASS.DUELIST}>
-					<a class="capitalize" href="/?class={CLASS.DUELIST}">{$_('class.duelist')}</a>
+					<a class="capitalize" href="{base}/?class={CLASS.DUELIST}">{$_('class.duelist')}</a>
 				</li>
 				<li class="flex items-center px-2" class:active={currentClass === CLASS.STRATEGIST}>
-					<a class="capitalize" href="/?class={CLASS.STRATEGIST}">{$_('class.strategist')}</a>
+					<a class="capitalize" href="{base}/?class={CLASS.STRATEGIST}">{$_('class.strategist')}</a>
 				</li>
 
 				<li class="bpx-2 flex items-center">
 					<div class="separator mx-2 h-4 w-[4px] rounded bg-white/40"></div>
 				</li>
 				<li class="flex items-center px-2" class:active={currentRoute === '/suggest'}>
-					<a href="/suggest">{$_('menu.suggest')}</a>
+					<a href="{base}/suggest">{$_('menu.suggest')}</a>
 				</li>
 				<li class="flex items-center px-2" class:active={currentRoute === '/tierlist'}>
-					<a href="/tierlist">{$_('menu.tierlist')}</a>
+					<a href="{base}/tierlist">{$_('menu.tierlist')}</a>
 				</li>
 			</ul>
 		</div>
@@ -60,7 +61,7 @@ const onLogout = async () => {
 				<li class="flex items-center px-2" class:active={isProfileShown}>
 					{#if !user}
 						<button class="flex items-center gap-x-1" onclick={supabaseLogin}
-						><img src="/icons/web_dark_sq_na.svg" alt="Google icon" />{$_('menu.login')}</button
+						><img src="{base}/icons/web_dark_sq_na.svg" alt="Google icon" />{$_('menu.login')}</button
 						>
 					{:else}
 						<button
@@ -69,7 +70,7 @@ const onLogout = async () => {
 						><img
 							class="flex h-4"
 							src={user?.user_metadata?.avatar_url}
-							onerror={(this.src = '/icons/person-circle-outline.svg')}
+							onerror={(this.src = '{base}/icons/person-circle-outline.svg')}
 							alt="User avatar"
 						/>{$_('profile.profile')}</button
 						>
@@ -92,7 +93,7 @@ const onLogout = async () => {
 					</button>
 				</li>
 				<li class="flex items-center px-2" class:active={currentRoute === '/about'}>
-					<a href="/about">?</a>
+					<a href="{base}/about">?</a>
 				</li>
 			</ul>
 		</div>
