@@ -2,6 +2,7 @@
 	import BannerButton from './BannerButton.svelte';
 	import ControlsBar from '$lib/components/ControlsBar.svelte';
 	import { _ } from 'svelte-i18n';
+	import { base } from '$app/paths';
 
 	let isAbout = $state(true);
 </script>
@@ -36,7 +37,7 @@
 				<BannerButton baseColor="#ffffff" pos="center" href="https://donatello.to/groovyboy"
 					><img
 						class="h-16 w-16"
-						src="/img/qr_donatello_to_groovyboy.svg"
+						src="{base}/img/qr_donatello_to_groovyboy.svg"
 						alt="Donation Qr Code"
 					/></BannerButton
 				>
