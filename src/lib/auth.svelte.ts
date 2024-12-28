@@ -8,7 +8,10 @@ export const supabase = createClient(
 
 export const supabaseLogin = async () => {
 	const { data, error } = await supabase.auth.signInWithOAuth({
-		provider: 'google'
+		provider: 'google',
+		options: {
+			redirectTo: 'https://igroovyboy.github.io/rivals/'
+		}
 	});
 
 	if (error) {
