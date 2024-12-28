@@ -140,7 +140,7 @@
 			{:else}
 				<div class="oops">
 					<p>{$_('main.no_counterpicks')}</p>
-					<p><a href="{base}/suggest">{$_('main.suggest')}</a> {$_('main.some')}!</p>
+					<p><a href="{base}/suggest?hero={hero.name}">{$_('main.suggest')}</a> {$_('main.some')}!</p>
 				</div>
 			{/if}
 		</div>

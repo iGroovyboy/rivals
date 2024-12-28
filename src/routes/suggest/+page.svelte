@@ -5,10 +5,13 @@
 	import { supabase } from '$lib/auth.svelte';
 	import { toast, TOAST_COLOR } from '$lib/toasts.svelte';
 	import { _ } from 'svelte-i18n';
+	import { onMount } from 'svelte';
+	import { base } from '$app/paths';
+	import { page } from '$app/state';
 
 	let { data } = $props();
 
-	let selectedMain = $state([]);
+	let selectedMain = $state<string[]>([]);
 	let selectedHeroes = $state([]);
 	let canSave = $derived(selectedMain.length && selectedHeroes.length);
 	let isLoading = $state(false);
@@ -47,11 +50,18 @@
 
 		isLoading = false;
 	};
+
+	onMount(() => {
+		const heroName = page.url.searchParams.get('hero');
+		if (heroName && getHeroByName(data.heroes, heroName)) {
+			selectedMain = [heroName];
+		}
+	});
 </script>
 
 <h1><strong>Marvel Rivals</strong> Suggest Counterpicks</h1>
 
-<div class="flex flex-col md:flex-row justify-between overflow-hidden">
+<div class="flex flex-col justify-between overflow-hidden md:flex-row">
 	<div class="flex flex-col">
 		<h2 class="w-full text-center">{$_('suggest.pick_hero')}</h2>
 
@@ -59,7 +69,7 @@
 	</div>
 
 	<div class="splitter mt-6 opacity-45">
-		<img class="hidden md:static " src="/img/vertical-line.svg" alt="decoration" />
+		<img class="hidden md:static" src="{base}/img/vertical-line.svg" alt="decoration" />
 	</div>
 
 	<div class="flex flex-col">
@@ -69,6 +79,6 @@
 	</div>
 </div>
 
-<div class="flex justify-center mb-12">
+<div class="mb-12 flex justify-center">
 	<Button disabled={isLoading || !canSave} onclick={save}>{$_('suggest.submit')}</Button>
 </div>
