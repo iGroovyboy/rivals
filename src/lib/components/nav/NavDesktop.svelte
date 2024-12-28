@@ -84,7 +84,7 @@
 							><img
 								class="flex h-4"
 								src={user?.user_metadata?.avatar_url}
-								onerror={(this.src = '{base}/icons/person-circle-outline.svg')}
+								onerror={(this.src = base + '/icons/person-circle-outline.svg')}
 								alt="User avatar"
 							/>{$_('profile.profile')}</button
 						>

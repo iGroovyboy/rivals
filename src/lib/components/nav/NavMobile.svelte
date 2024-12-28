@@ -7,6 +7,7 @@
 	import { _ } from 'svelte-i18n';
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
+	import Button from '$lib/components/Button.svelte';
 
 	let { user } = $props();
 
@@ -53,16 +54,19 @@
 					><img src="{base}/icons/web_dark_sq_na.svg" alt="Google icon" />{$_('menu.login')}</button
 				>
 			{:else}
-				<button
-					class="relative flex w-full items-center gap-x-1"
-					onclick={() => action('fn', logout)}
+				<div class="flex flex-col w-full">
+					<button
+						class="relative flex w-full items-center gap-x-1"
+						onclick={() => action('fn', logout)}
 					><img
 						class="flex h-4"
-						src={user?.user_metadata?.avatar_url}
-						onerror={(this.src = '{base}/icons/person-circle-outline.svg')}
+						src={user?.user_metadata?.avatar_url || base + '/icons/person-circle-outline.svg'}
+						onerror={(this.src = base + '/icons/person-circle-outline.svg')}
 						alt="User avatar"
-					/>{$_('profile.profile')}</button
-				>
+					/>{user.email}</button
+					>
+					<button class="flex w-full" onclick={logout}>{$_('menu.logout')}</button>
+				</div>
 			{/if}
 		</li>
 		<li class="flex items-center gap-x-2 border-b-2 border-white/30 p-2">
