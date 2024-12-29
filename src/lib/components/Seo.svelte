@@ -6,7 +6,7 @@
 	const domain = 'igroovyboy.github.io/rivals/';
 	const host = 'https://igroovyboy.github.io/rivals/';
 	const currentRoute = host + page.url.pathname.toString().replace('/', '');
-	const image = host + '/img/screenshot.png';
+	const image = host + 'img/screenshot.png';
 	const name = 'Marvel Rivals Counterpicks';
 </script>
 
