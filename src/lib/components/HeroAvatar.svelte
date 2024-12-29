@@ -21,6 +21,7 @@
 		class:selected
 		class:sized={!autosize}
 		class="frame flex cursor-pointer items-center border-[var(--dark-blue)] bg-transparent hover:border-y-2"
+		aria-label="Hero button"
 		{onclick}
 	>
 		<img class="w-full" src="{base}/icons/{classname}/{iconFilename(name)}" alt={name} />

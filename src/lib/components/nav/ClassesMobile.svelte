@@ -15,7 +15,7 @@ let currentRoute = $derived(page.route.id || '');
 >
 	<ul class="flex w-full h-full" data-cl={currentClass}>
 		<li class="flex w-1/4 items-center justify-center" class:active={currentClass === CLASS.ALL}>
-			<button class="flex justify-center w-full" onclick={() => useStore.currentClass = CLASS.ALL}
+			<button aria-label={CLASS.ALL} class="flex justify-center w-full" onclick={() => useStore.currentClass = CLASS.ALL}
 			><SvgIcon icon="CLASS_ALL" active={currentClass === CLASS.ALL} /></button
 			>
 		</li>
@@ -23,7 +23,7 @@ let currentRoute = $derived(page.route.id || '');
 			class="flex w-1/4 items-center justify-center"
 			class:active={currentClass === CLASS.VANGUARD}
 		>
-			<button class="flex justify-center w-full" onclick={() => useStore.currentClass = CLASS.VANGUARD}
+			<button aria-label={CLASS.VANGUARD} class="flex justify-center w-full" onclick={() => useStore.currentClass = CLASS.VANGUARD}
 			><SvgIcon icon="CLASS_VANGUARD" active={currentClass === CLASS.VANGUARD} /></button
 			>
 		</li>
@@ -31,7 +31,7 @@ let currentRoute = $derived(page.route.id || '');
 			class="flex w-1/4 items-center justify-center"
 			class:active={currentClass === CLASS.DUELIST}
 		>
-			<button class="flex justify-center w-full"onclick={() => useStore.currentClass = CLASS.DUELIST}
+			<button aria-label={CLASS.DUELIST} class="flex justify-center w-full"onclick={() => useStore.currentClass = CLASS.DUELIST}
 			><SvgIcon icon="CLASS_DUELIST" active={currentClass === CLASS.DUELIST} /></button
 			>
 		</li>
@@ -39,7 +39,7 @@ let currentRoute = $derived(page.route.id || '');
 			class="flex w-1/4 items-center justify-center"
 			class:active={currentClass === CLASS.STRATEGIST}
 		>
-			<button class="flex justify-center w-full" onclick={() => useStore.currentClass = CLASS.STRATEGIST}
+			<button aria-label={CLASS.STRATEGIST} class="flex justify-center w-full" onclick={() => useStore.currentClass = CLASS.STRATEGIST}
 			><SvgIcon icon="CLASS_STRATEGIST" active={currentClass === CLASS.STRATEGIST} /></button
 			>
 		</li>

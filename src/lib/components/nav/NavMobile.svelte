@@ -89,17 +89,17 @@
 
 	<ul class="flex h-7 w-full">
 		<li class="flex w-1/4 items-center justify-center" class:active={currentRoute === '/'}>
-			<button class="flex w-full justify-center" onclick={() => action('goto', base + '/')}
+			<button aria-label="Home" class="flex w-full justify-center" onclick={() => action('goto', base + '/')}
 				><SvgIcon icon="HOME" active={currentRoute === '/'} /></button
 			>
 		</li>
 		<li class="flex w-1/4 items-center justify-center" class:active={currentRoute === '/suggest'}>
-			<button class="flex w-full justify-center" onclick={() => action('goto', base + '/suggest')}
+			<button aria-label="Suggest" class="flex w-full justify-center" onclick={() => action('goto', base + '/suggest')}
 				><SvgIcon icon="SUGGEST" active={currentRoute === '/suggest'} /></button
 			>
 		</li>
 		<li class="flex w-1/4 items-center justify-center" class:active={currentRoute === '/tierlist'}>
-			<button class="flex w-full justify-center" onclick={() => action('goto', base + '/tierlist')}
+			<button aria-label="Tier list" class="flex w-full justify-center" onclick={() => action('goto', base + '/tierlist')}
 				><SvgIcon icon="LIST" active={currentRoute === '/tierlist'} /></button
 			>
 		</li>

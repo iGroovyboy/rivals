@@ -9,6 +9,7 @@
 	import { onMount } from 'svelte';
 	import { toast, TOAST_COLOR } from '$lib/toasts.svelte';
 	import SvgIcon from '$lib/components/SvgIcon.svelte';
+	import Seo from '$lib/components/Seo.svelte';
 
 	let { data } = $props();
 
@@ -120,6 +121,8 @@
 		}
 	});
 </script>
+
+<Seo title="Best and Worst Characters" description="Explore, create and share the Marvel Rivals tier list with rankings of all characters, from strongest to weakest." />
 
 <h1><strong>Marvel Rivals</strong> {$_('tierlist.heroes_tierlist')}</h1>
 

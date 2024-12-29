@@ -10,6 +10,7 @@
 	import { _ } from 'svelte-i18n';
 	import { base } from '$app/paths';
 	import { onMount } from 'svelte';
+	import Seo from '$lib/components/Seo.svelte';
 
 	let { data } = $props();
 
@@ -51,6 +52,8 @@
 		useStore.currentClass = page.url.searchParams.get('class') || CLASS.ALL
 	})
 </script>
+
+<Seo title="Best Counterpicks for Every Matchup" description="Find the best counterpicks for Marvel Rivals matchups. Analyze top strategies and win your next game." />
 
 <h1><strong>Marvel Rivals</strong> {$_('main.header')}</h1>
 

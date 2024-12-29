@@ -3,9 +3,12 @@
 	import ControlsBar from '$lib/components/ControlsBar.svelte';
 	import { _ } from 'svelte-i18n';
 	import { base } from '$app/paths';
+	import Seo from '$lib/components/Seo.svelte';
 
 	let isAbout = $state(true);
 </script>
+
+<Seo title="About" description="Learn more about Marvel Rivals Counterpicks, our mission, how we support players and how you can support us!" />
 
 <h1>About Marvel Rivals Counterpicks</h1>
 

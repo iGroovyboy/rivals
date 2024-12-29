@@ -8,6 +8,7 @@
 	import { onMount } from 'svelte';
 	import { base } from '$app/paths';
 	import { page } from '$app/state';
+	import Seo from '$lib/components/Seo.svelte';
 
 	let { data } = $props();
 
@@ -58,6 +59,8 @@
 		}
 	});
 </script>
+
+<Seo title="Suggest Counterpicks" description="Suggest new counterpicks and help the community find better strategies." />
 
 <h1><strong>Marvel Rivals</strong> Suggest Counterpicks</h1>
 
