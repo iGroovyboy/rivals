@@ -60,7 +60,10 @@
 	});
 </script>
 
-<Seo title="Suggest Counterpicks" description="Suggest new counterpicks and help the community find better strategies." />
+<Seo
+	title="Suggest Counterpicks"
+	description="Suggest new counterpicks and help the community find better strategies."
+/>
 
 <h1><strong>Marvel Rivals</strong> Suggest Counterpicks</h1>
 

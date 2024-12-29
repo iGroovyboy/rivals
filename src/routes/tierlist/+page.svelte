@@ -122,7 +122,10 @@
 	});
 </script>
 
-<Seo title="Best and Worst Characters" description="Explore, create and share the Marvel Rivals tier list with rankings of all characters, from strongest to weakest." />
+<Seo
+	title="Best and Worst Characters"
+	description="Explore, create and share the Marvel Rivals tier list with rankings of all characters, from strongest to weakest."
+/>
 
 <h1><strong>Marvel Rivals</strong> {$_('tierlist.heroes_tierlist')}</h1>
 

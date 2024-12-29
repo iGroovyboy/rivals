@@ -8,21 +8,20 @@
 	let isAbout = $state(true);
 </script>
 
-<Seo title="About" description="Learn more about Marvel Rivals Counterpicks, our mission, how we support players and how you can support us!" />
+<Seo
+	title="About"
+	description="Learn more about Marvel Rivals Counterpicks, our mission, how we support players and how you can support us!"
+/>
 
 <h1>About Marvel Rivals Counterpicks</h1>
 
 <ControlsBar gap="0">
-		<button onclick={() => (isAbout = true)} class:active={isAbout} class="px-2 text-sm uppercase">
-			{$_('about.about')}
-		</button>
-		<button
-			onclick={() => (isAbout = false)}
-			class:active={!isAbout}
-			class="px-2 text-sm uppercase"
-		>
-			{$_('about.help')}
-		</button>
+	<button onclick={() => (isAbout = true)} class:active={isAbout} class="px-2 text-sm uppercase">
+		{$_('about.about')}
+	</button>
+	<button onclick={() => (isAbout = false)} class:active={!isAbout} class="px-2 text-sm uppercase">
+		{$_('about.help')}
+	</button>
 </ControlsBar>
 
 {#if isAbout}
@@ -35,7 +34,8 @@
 		<section>
 			<p>{$_('about.h_donations')}</p>
 			<div class="flex items-center">
-				<BannerButton baseColor="#ffbb00" href="https://donatello.to/groovyboy">{$_('about.donate')}</BannerButton
+				<BannerButton baseColor="#ffbb00" href="https://donatello.to/groovyboy"
+					>{$_('about.donate')}</BannerButton
 				>
 				<BannerButton baseColor="#ffffff" pos="center" href="https://donatello.to/groovyboy"
 					><img
