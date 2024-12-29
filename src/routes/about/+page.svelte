@@ -13,7 +13,7 @@
 	description="Learn more about Marvel Rivals Counterpicks, our mission, how we support players and how you can support us!"
 />
 
-<h1>About Marvel Rivals Counterpicks</h1>
+<h1><strong>About</strong> Marvel Rivals Counterpicks</h1>
 
 <ControlsBar gap="0">
 	<button onclick={() => (isAbout = true)} class:active={isAbout} class="px-2 text-sm uppercase">
@@ -29,6 +29,11 @@
 		<section>
 			<h2>{$_('about.disclaimer')}</h2>
 			<p class="text-xs">{$_('about.discl_descr')}</p>
+		</section>
+
+		<section>
+			<h2>Privacy policy</h2>
+			<a class="text-indigo-500 font-semibold" href="{base}/privacy-policy">View</a>
 		</section>
 
 		<section>

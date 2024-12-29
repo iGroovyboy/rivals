@@ -30,3 +30,7 @@ button {
 svg {
 	inline-size: 1rem;
 }
+
+h1 {
+	font-weight: 500;
+}
