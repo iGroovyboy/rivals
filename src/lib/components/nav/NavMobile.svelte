@@ -7,7 +7,6 @@
 	import { _ } from 'svelte-i18n';
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
-	import Button from '$lib/components/Button.svelte';
 
 	let { user } = $props();
 

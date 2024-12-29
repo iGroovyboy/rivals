@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { type APIHeroData, filterableClasses } from '$lib';
+	import { type APIHeroData, CLASS, filterableClasses } from '$lib';
 	import { filterHeroesByClass } from '$lib/helpers';
 	import HeroBigAvatar from '$lib/components/HeroBigAvatar.svelte';
 	import ClassAvatar from '$lib/components/ClassAvatar.svelte';
@@ -9,12 +9,13 @@
 	import ControlsBar from '$lib/components/ControlsBar.svelte';
 	import { _ } from 'svelte-i18n';
 	import { base } from '$app/paths';
+	import { onMount } from 'svelte';
 
 	let { data } = $props();
 
 	let searchText = $state('');
 
-	let currentClass = $derived(page.url.searchParams.get('class') || '');
+	let currentClass = $derived(useStore.currentClass);
 
 	let canFilterByClass = $derived(filterableClasses.includes(currentClass));
 
@@ -45,6 +46,10 @@
 	const clearFilter = () => {
 		searchText = '';
 	};
+
+	onMount(() => {
+		useStore.currentClass = page.url.searchParams.get('class') || CLASS.ALL
+	})
 </script>
 
 <h1><strong>Marvel Rivals</strong> {$_('main.header')}</h1>

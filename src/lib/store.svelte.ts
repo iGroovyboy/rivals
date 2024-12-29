@@ -1,7 +1,10 @@
-import { LS_KEYS } from '$lib/index';
+import { CLASS, type Classname, LS_KEYS } from '$lib/index';
+import { goto } from '$app/navigation';
+import { base } from '$app/paths';
 
 const store = $state({
-	favorites: []
+	favorites: [],
+	currentClass: CLASS.ALL
 });
 
 export const useStore = {
@@ -17,6 +20,15 @@ export const useStore = {
 		}
 
 		localStorage.setItem(LS_KEYS.FAVORITES, JSON.stringify(store.favorites));
+	},
+
+	get currentClass() {
+		return store.currentClass;
+	},
+
+	set currentClass(classname: Classname) {
+		store.currentClass = classname;
+		goto(base + '/?class=' + classname);
 	}
 };
 

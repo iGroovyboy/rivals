@@ -7,10 +7,12 @@
 	import Profile from '../../../routes/Profile.svelte';
 	import { LANG, setLocale } from '../../../i18n/i18n.ts';
 	import { base } from '$app/paths';
+	import { goto } from '$app/navigation';
+	import { useStore } from '$lib/store.svelte';
 
 	let { user } = $props();
 
-	let currentClass = $derived(page.url.searchParams.get('class') || '');
+	let currentClass = $derived(useStore.currentClass);
 
 	let currentRoute = $derived(page.route.id || '');
 
@@ -43,28 +45,28 @@
 	<div class="menu flex w-11/12 flex-row justify-between px-6">
 		<div class="start">
 			<ul class="flex h-full">
-				<li class="flex items-center px-2" class:active={currentClass === CLASS.ALL}>
-					<a class="capitalize" href="{base}/?class={CLASS.ALL}">{$_('class.all')}</a>
+				<li class="flex items-center px-2" class:active={currentRoute === '/' && currentClass === CLASS.ALL}>
+					<button class="capitalize" onclick={() => useStore.currentClass = CLASS.ALL}>{$_('class.all')}</button>
 				</li>
-				<li class="flex items-center px-2" class:active={currentClass === CLASS.VANGUARD}>
-					<a class="flex capitalize" href="{base}/?class={CLASS.VANGUARD}">{$_('class.vanguard')}</a
+				<li class="flex items-center px-2" class:active={currentRoute === '/' && currentClass === CLASS.VANGUARD}>
+					<button class="flex capitalize" onclick={() => useStore.currentClass = CLASS.VANGUARD}>{$_('class.vanguard')}</button
 					>
 				</li>
-				<li class="flex items-center px-2" class:active={currentClass === CLASS.DUELIST}>
-					<a class="capitalize" href="{base}/?class={CLASS.DUELIST}">{$_('class.duelist')}</a>
+				<li class="flex items-center px-2" class:active={currentRoute === '/' && currentClass === CLASS.DUELIST}>
+					<button class="capitalize" onclick={() => useStore.currentClass = CLASS.DUELIST}>{$_('class.duelist')}</button>
 				</li>
-				<li class="flex items-center px-2" class:active={currentClass === CLASS.STRATEGIST}>
-					<a class="capitalize" href="{base}/?class={CLASS.STRATEGIST}">{$_('class.strategist')}</a>
+				<li class="flex items-center px-2" class:active={currentRoute === '/' && currentClass === CLASS.STRATEGIST}>
+					<button class="capitalize" onclick={() => useStore.currentClass = CLASS.STRATEGIST}>{$_('class.strategist')}</button>
 				</li>
 
 				<li class="bpx-2 flex items-center">
 					<div class="separator mx-2 h-4 w-[4px] rounded bg-white/40"></div>
 				</li>
 				<li class="flex items-center px-2" class:active={currentRoute === '/suggest'}>
-					<a href="{base}/suggest">{$_('menu.suggest')}</a>
+					<button onclick={() => goto(base + "/suggest")}>{$_('menu.suggest')}</button>
 				</li>
 				<li class="flex items-center px-2" class:active={currentRoute === '/tierlist'}>
-					<a href="{base}/tierlist">{$_('menu.tierlist')}</a>
+					<button onclick={() => goto(base + "/tierlist")}>{$_('menu.tierlist')}</button>
 				</li>
 			</ul>
 		</div>
