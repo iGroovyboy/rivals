@@ -10,4 +10,9 @@ declare global {
 	}
 }
 
+declare interface Window {
+	dataLayer: any;
+	gtag?: any;
+}
+
 export {};

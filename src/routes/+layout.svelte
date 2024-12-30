@@ -8,6 +8,7 @@
 	import NavDesktop from '$lib/components/nav/NavDesktop.svelte';
 	import ClassesMobile from '$lib/components/nav/ClassesMobile.svelte';
 	import NavMobile from '$lib/components/nav/NavMobile.svelte';
+	import { browser } from '$app/environment';
 
 	let { children, data } = $props();
 
@@ -18,6 +19,14 @@
 		restoreStore();
 		user = data.user;
 	});
+
+	if (browser) {
+		window.dataLayer = window.dataLayer || [];
+		window.gtag = function gtag(){window.dataLayer.push(arguments);}
+		window.gtag('js', new Date());
+
+		window.gtag('config', 'G-7T6LTHK7V7');
+	}
 </script>
 
 <div class="bg -z-10"></div>
@@ -33,6 +42,10 @@
 </div>
 
 <Toasts />
+
+<svelte:head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-7T6LTHK7V7"></script>
+</svelte:head>
 
 <style>
 	.bg {
