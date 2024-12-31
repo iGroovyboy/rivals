@@ -4,6 +4,7 @@
 
 :root {
 	--dark-blue: #34345e;
+	--dark-blue-mob: #7979a6;
 	--light-blue: #c0c6e8;
 	--black: rgba(37, 37, 44, 0.92);
 	--light-grey: rgba(200, 200, 200, 0.91);
@@ -13,12 +14,13 @@
 
 html {
 	font-size: 40px;
-	background-color: var(--dark-blue);
 	color: var(--black);
 	font-family: 'Alumni Sans', sans-serif;
 	font-optical-sizing: auto;
 	font-weight: 300;
 	font-style: normal;
+
+	@apply bg-[var(--dark-blue-mob)] md:bg-[var(--dark-blue)];
 }
 
 button {

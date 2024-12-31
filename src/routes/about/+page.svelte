@@ -4,6 +4,7 @@
 	import { _ } from 'svelte-i18n';
 	import { base } from '$app/paths';
 	import Seo from '$lib/components/Seo.svelte';
+	import { goto } from '$app/navigation';
 
 	let isAbout = $state(true);
 </script>
@@ -21,6 +22,9 @@
 	</button>
 	<button onclick={() => (isAbout = false)} class:active={!isAbout} class="px-2 text-sm uppercase">
 		{$_('about.help')}
+	</button>
+	<button onclick={() => goto(base + '/contact')} class="px-2 text-sm uppercase">
+		Contact
 	</button>
 </ControlsBar>
 
