@@ -1,18 +1,13 @@
 import type { PageLoad } from './$types';
-import type { APIHeroData } from '$lib';
-import { supabase } from '$lib/auth.svelte';
-import { deepCloneObject } from '$lib/helpers';
+import { deepCloneObject, fetchHeroesData } from '$lib/helpers';
 
 export const load: PageLoad = async () => {
-	let { data: heroes }: { data: APIHeroData[] } = await supabase.from('heroes').select('*');
-	if (!heroes) {
-		console.error('No heroes found.');
-	}
+	const heroes = await fetchHeroesData();
 
 	return {
 		heroes,
 		tierlist: getEmptyTierlist(heroes),
-		default: getDefaultTierlist(heroes)
+		default: getDefaultTierlist()
 	};
 };
 

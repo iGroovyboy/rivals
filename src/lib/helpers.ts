@@ -1,4 +1,6 @@
 import { type APICounterpickData, type APIHeroData, filterableClasses } from '$lib/index';
+import { supabase } from '$lib/auth.svelte';
+import { HEROES } from '../data_heroes';
 
 export const deepCloneObject = (obj: unknown) => {
 	return JSON.parse(JSON.stringify(obj));
@@ -67,4 +69,14 @@ export const lightenColor = (color = '#cdcdcd', percent = 60): string => {
 
 	const toHex = (value) => value.toString(16).padStart(2, '0');
 	return `#${toHex(newR)}${toHex(newG)}${toHex(newB)}`;
+};
+
+export const fetchHeroesData = async (): APIHeroData[] => {
+	let { data: heroes }: { data: APIHeroData[] } = await supabase.from('heroes').select('*');
+	if (!heroes) {
+		console.error('No heroes found in db, using static data.');
+		return HEROES;
+	}
+
+	return heroes;
 };
